@@ -7,8 +7,8 @@ package rs.ac.bg.fon.np.sc.klijent.forme;
 
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import rs.ac.bg.fon.np.sc.commonLib.domen.Korisnik;
-import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
+import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
 
 /**
  *
@@ -96,6 +96,7 @@ public class PrijaviSeForma extends OpstaEkranskaForma {
 
     private void btnPrijaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrijaviSeActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnPrijaviSeActionPerformed
 
 
