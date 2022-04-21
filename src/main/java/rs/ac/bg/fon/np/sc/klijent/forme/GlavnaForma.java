@@ -6,6 +6,7 @@
 package rs.ac.bg.fon.np.sc.klijent.forme;
 
 import javax.swing.JFrame;
+import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
 
 /**
  *
@@ -19,6 +20,7 @@ public class GlavnaForma extends javax.swing.JFrame {
     public GlavnaForma() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        txtKorisnik.setText(Komunikacija.getInstanca().getTrenutniKorisnik().toString());
     }
 
     /**
@@ -215,7 +217,6 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiIzmeniSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiPasActionPerformed
         // TODO add your handling code here:
-        //new IzmeniSkiPasForma().setVisible(true);
     }//GEN-LAST:event_jmiIzmeniSkiPasActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
