@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.komunikacija;
 
+import com.google.gson.Gson;
 import java.net.Socket;
 import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
 import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Odgovor;
@@ -48,6 +49,12 @@ public class Komunikacija {
     public Odgovor pozivSo(Zahtev zahtev) throws Exception {
         new Posiljalac(socket).posalji(zahtev);
         return (Odgovor) new Primalac(socket).primi();
+    }
+
+    public void setTrenutniKorisnikJson(String json) {
+        Gson gson = new Gson();
+        Korisnik k = gson.fromJson(json, Korisnik.class);
+        trenutniKorisnik = k;
     }
 
 }
