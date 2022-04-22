@@ -7,6 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import java.math.BigDecimal;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleSkiKarte;
@@ -28,7 +29,7 @@ public class KontrolerKIPretraziSkiKarte extends OpstiKontrolerKI {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
-        obj.addProperty("cenaSkiKarte", gson.toJson(pskf.getTxtGornjaCena().getText()));
+        obj.addProperty("cenaSkiKarte", new BigDecimal(pskf.getTxtGornjaCena().getText()));
         objekat = gson.toJson(obj);
     }
 
