@@ -18,7 +18,7 @@ import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
 public class ModelTabeleStaza extends AbstractTableModel {
 
     List<Staza> staze;
-    String[] kolone = new String[]{"brojStaze", "nazivStaze", "tipStaze", "SkiCentar"};
+    String[] kolone = new String[]{"ID staze", "Broj staze", "Naziv staze", "TIp staze", "Ski centar"};
 
     public ModelTabeleStaza() {
         staze = new ArrayList<>();
@@ -48,12 +48,14 @@ public class ModelTabeleStaza extends AbstractTableModel {
         Staza s = staze.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return s.getBrojStaze();
+                return s.getIdStaze();
             case 1:
-                return s.getNazivStaze();
+                return s.getBrojStaze();
             case 2:
-                return s.getTipStaze();
+                return s.getNazivStaze();
             case 3:
+                return s.getTipStaze();
+            case 4:
                 return s.getSkiCentar();
             default:
                 return "Greska";
