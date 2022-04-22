@@ -148,7 +148,7 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        //kkiPromeniStazu.soUcitajStazu();
+        kkiPromeniStazu.soUcitajStazu();
     }//GEN-LAST:event_formWindowOpened
 
 
@@ -198,7 +198,5 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
     public JTextField getTxtSifraStaze() {
         return txtSifraStaze;
     }
-    
-    
 
 }
