@@ -55,7 +55,6 @@ public class ZapamtiSkiKartuForma extends OpstaEkranskaForma {
         txtSifraSkiKarte.setEditable(false);
 
         btnZapamti.setText("zapamti");
-        btnZapamti.setEnabled(false);
         btnZapamti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZapamtiActionPerformed(evt);
@@ -127,8 +126,7 @@ public class ZapamtiSkiKartuForma extends OpstaEkranskaForma {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnZapamtiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiActionPerformed
-        //kkiZapamtiSkiKartu.SOZapamtiSkiKartu();
-
+        kkiZapamtiSkiKartu.SOZapamtiSkiKartu();
     }//GEN-LAST:event_btnZapamtiActionPerformed
 
 

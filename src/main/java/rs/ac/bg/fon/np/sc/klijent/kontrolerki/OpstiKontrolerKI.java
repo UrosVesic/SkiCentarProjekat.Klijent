@@ -72,6 +72,24 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public void SOZapamtiSkiKartu() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: ", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     protected abstract OpstiDomenskiObjekat konvertujJsonUDomenskiObjekat(String obj);
 
 }
