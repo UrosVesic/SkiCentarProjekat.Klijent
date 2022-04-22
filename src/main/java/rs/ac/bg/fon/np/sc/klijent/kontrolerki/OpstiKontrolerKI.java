@@ -26,7 +26,6 @@ public abstract class OpstiKontrolerKI {
 
     protected String objekat;
     protected OpstaEkranskaForma oef;
-    protected List<OpstiDomenskiObjekat> lista = new ArrayList<>();
     protected OpstiDomenskiObjekat[] niz;
 
     public abstract void KonvertujGrafickiObjekatUJson();
@@ -129,6 +128,44 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    public void soPretraziStaze() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZE, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao staze");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi staze: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi staze: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void soUcitajStazu() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_STAZU, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je ucitao stazu");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }
