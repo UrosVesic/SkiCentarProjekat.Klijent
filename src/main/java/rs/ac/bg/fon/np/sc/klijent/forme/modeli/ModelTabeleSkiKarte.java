@@ -18,7 +18,7 @@ public class ModelTabeleSkiKarte extends AbstractTableModel {
     String[] kolone = {"Sifra ski karte", "Vrsta ski karte", "Cena ski karte", "Ski centar"};
 
     public ModelTabeleSkiKarte() {
-        //skiKarte = new ArrayList<>();
+        skiKarte = new SkiKarta[0];
     }
 
     public void setSkiKarte(SkiKarta[] skiKarte) {
