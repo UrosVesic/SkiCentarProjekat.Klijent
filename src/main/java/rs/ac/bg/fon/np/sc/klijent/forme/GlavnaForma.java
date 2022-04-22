@@ -6,6 +6,7 @@
 package rs.ac.bg.fon.np.sc.klijent.forme;
 
 import javax.swing.JFrame;
+import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.ZapamtiSkiKartuForma;
 import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
 
 /**
@@ -205,6 +206,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiKreirajSkiKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajSkiKartuActionPerformed
         // TODO add your handling code here:
+        new ZapamtiSkiKartuForma().setVisible(true);
     }//GEN-LAST:event_jmiKreirajSkiKartuActionPerformed
 
     private void jmiPretraziSkiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretraziSkiKarteActionPerformed

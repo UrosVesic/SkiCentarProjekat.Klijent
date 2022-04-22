@@ -5,7 +5,10 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.kontrolerki;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
 import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
@@ -23,6 +26,7 @@ public abstract class OpstiKontrolerKI {
 
     protected String objekat;
     protected OpstaEkranskaForma oef;
+    protected List<OpstiDomenskiObjekat> lista = new ArrayList<>();
 
     public abstract void KonvertujGrafickiObjekatUJson();
 
@@ -43,7 +47,7 @@ public abstract class OpstiKontrolerKI {
                 oef.dispose();
                 return true;
             } else {
-                JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje: "+odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         } catch (Exception ex) {
@@ -53,5 +57,21 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public Odgovor soUcitajListuSkiCentara() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_CENTARA, null);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                return odgovor;
+            } else {
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
     protected abstract OpstiDomenskiObjekat konvertujJsonUDomenskiObjekat(String obj);
+
 }
