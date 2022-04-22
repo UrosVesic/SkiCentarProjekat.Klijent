@@ -27,6 +27,7 @@ public abstract class OpstiKontrolerKI {
     protected String objekat;
     protected OpstaEkranskaForma oef;
     protected List<OpstiDomenskiObjekat> lista = new ArrayList<>();
+    protected OpstiDomenskiObjekat[] niz;
 
     public abstract void KonvertujGrafickiObjekatUJson();
 
@@ -43,7 +44,7 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
                 objekat = odgovor.getRezultat();
-                Komunikacija.getInstanca().setTrenutniKorisnik((Korisnik) konvertujJsonUDomenskiObjekat(objekat));
+                Komunikacija.getInstanca().setTrenutniKorisnikJson(objekat);
                 oef.dispose();
                 return true;
             } else {
@@ -57,13 +58,13 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
-    public Odgovor soUcitajListuSkiCentara() throws Exception {
+    public void soUcitajListuSkiCentara() throws Exception {
         Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_CENTARA, null);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                return odgovor;
+                objekat = odgovor.getRezultat();
             } else {
                 throw odgovor.getException();
             }
@@ -86,10 +87,27 @@ public abstract class OpstiKontrolerKI {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: ", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    protected abstract OpstiDomenskiObjekat konvertujJsonUDomenskiObjekat(String obj);
+    public void soPretraziKarte() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_KARTE, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski karte: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski karte: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
 }

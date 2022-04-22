@@ -7,6 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import java.util.List;
 import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
 import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
@@ -37,10 +38,6 @@ public class KontrolerKIPrijaviSe extends OpstiKontrolerKI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    protected OpstiDomenskiObjekat konvertujJsonUDomenskiObjekat(String obj) {
-        Gson gson = new Gson();
-        return gson.fromJson(obj, Korisnik.class);
-    }
+
 
 }

@@ -6,12 +6,13 @@
 package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
@@ -53,31 +54,17 @@ public class KontrolerKIZapamtiSkiKartu extends OpstiKontrolerKI {
         zskf.getTxtSifraSkiKarte().setText(skiKarta.getSifraSkiKarte() + "");
     }
 
-    @Override
-    protected OpstiDomenskiObjekat konvertujJsonUDomenskiObjekat(String obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void pripremiKombobox() {
         ZapamtiSkiKartuForma zskf = (ZapamtiSkiKartuForma) oef;
+        Gson gson = new Gson();
         zskf.getCmbSkiCentar().removeAllItems();
         try {
-            Odgovor odgovor = soUcitajListuSkiCentara();
-            lista = konvertujJsonUListuSkiCentara(odgovor.getRezultat());
-            for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-                zskf.getCmbSkiCentar().addItem((SkiCentar) opstiDomenskiObjekat);
-            }
+            soUcitajListuSkiCentara();
+            niz = gson.fromJson(objekat, SkiCentar[].class);
+            zskf.getCmbSkiCentar().setModel(new DefaultComboBoxModel(niz));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    private List<OpstiDomenskiObjekat> konvertujJsonUListuSkiCentara(String rezultat) {
-        Gson gson = new Gson();
-        Type collectionType = new TypeToken<ArrayList<SkiCentar>>() {
-        }.getType();
-        List<OpstiDomenskiObjekat> konvertovana = gson.fromJson(rezultat, collectionType);
-        return konvertovana;
     }
 
 }
