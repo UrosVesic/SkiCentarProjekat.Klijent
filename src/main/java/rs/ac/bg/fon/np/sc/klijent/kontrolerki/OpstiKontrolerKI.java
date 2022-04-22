@@ -82,6 +82,7 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 objekat = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
@@ -100,6 +101,7 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 objekat = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski karte");
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski karte: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
@@ -109,5 +111,24 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public void soZapamtiStazu() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_STAZU, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
 
 }
