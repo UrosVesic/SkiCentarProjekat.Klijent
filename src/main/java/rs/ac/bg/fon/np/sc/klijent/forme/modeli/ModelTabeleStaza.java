@@ -101,12 +101,10 @@ public class ModelTabeleStaza extends AbstractTableModel {
     public void azurirajStazu(Staza staza) {
         for (int i = 0; i < staze.size(); i++) {
             if (staze.get(i).equals(staza)) {
-                if (staza.getSkiCentar().equals(staze.get(i).getSkiCentar())) {
-                    staze.add(i, staza);
-                    staze.remove(i + 1);
-                } else {
-                    staze.remove(i);
-                }
+                staze.get(i).setBrojStaze(staza.getBrojStaze());
+                staze.get(i).setNazivStaze(staza.getNazivStaze());
+                staze.get(i).setTipStaze(staza.getTipStaze());
+                staze.get(i).setSkiCentar(staza.getSkiCentar());
                 fireTableDataChanged();
             }
         }
