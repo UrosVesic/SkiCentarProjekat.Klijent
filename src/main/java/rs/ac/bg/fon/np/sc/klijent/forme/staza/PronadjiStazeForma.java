@@ -170,7 +170,7 @@ public class PronadjiStazeForma extends OpstaEkranskaForma {
     // End of variables declaration//GEN-END:variables
 
     public void azurirajTabelu(Staza staza) {
-        //kkiPronadjiStazu.azurirajTabelu(staza);
+        kkiPronadjiStazu.azurirajTabelu(staza);
     }
 
     private void prepare() {

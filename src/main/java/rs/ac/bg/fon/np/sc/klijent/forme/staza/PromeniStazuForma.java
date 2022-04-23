@@ -142,8 +142,11 @@ public class PromeniStazuForma extends OpstaEkranskaForma {
 
     private void btnZapamtiPromeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiPromeneActionPerformed
         // TODO add your handling code here:
-        //kkiPromeniStazu.SOZapamtiStazu();
-        //psf.azurirajTabelu((Staza) kkiPromeniStazu.getOdo());
+        try {
+            kkiPromeniStazu.soPromeniStazu();
+            psf.azurirajTabelu((Staza) kkiPromeniStazu.getStaza());
+        } catch (Exception ex) {
+        }
     }//GEN-LAST:event_btnZapamtiPromeneActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

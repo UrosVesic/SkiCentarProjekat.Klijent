@@ -168,4 +168,29 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public void soPromeniStazu() throws Exception {
+        int i = 0;
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PROMENI_STAZU, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je promenio stazu");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni stazu: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                i = 1;
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (i == 0) {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni stazu: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+            throw ex;
+        }
+    }
+
 }

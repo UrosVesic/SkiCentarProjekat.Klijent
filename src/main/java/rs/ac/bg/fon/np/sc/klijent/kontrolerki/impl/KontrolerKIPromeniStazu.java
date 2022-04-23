@@ -30,13 +30,22 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
         psf = (PromeniStazuForma) oef;
     }
 
+    public Staza getStaza() {
+        return staza;
+    }
+
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
+        obj.addProperty("idStaze", psf.getTxtSifraStaze().getText());
         obj.addProperty("brojStaze", psf.getTxtBrojStaze().getText());
+        obj.addProperty("nazivStaze", psf.getTxtNazivStaze().getText());
+        obj.addProperty("tipStaze", String.valueOf(psf.getCmbTipStaze().getSelectedItem()));
+        JsonObject obj1 = (JsonObject) gson.toJsonTree(psf.getCmbSkiCentar().getSelectedItem());
+        obj.add("skiCentar", obj1);
         objekat = gson.toJson(obj);
-
+        staza = gson.fromJson(objekat, Staza.class);
     }
 
     @Override
@@ -60,6 +69,7 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
     }
 
     public void pripremiFormu() {
+        psf.getTxtSifraStaze().setText(staza.getIdStaze() + "");
         psf.getTxtBrojStaze().setText(staza.getBrojStaze());
         psf.getTxtNazivStaze().setText(staza.getNazivStaze());
         psf.getCmbTipStaze().setSelectedItem(staza.getTipStaze());

@@ -61,4 +61,9 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
         return model.getStaze().get(psf.getTblStaze().getSelectedRow());
     }
 
+    public void azurirajTabelu(Staza staza) {
+        ModelTabeleStaza model = (ModelTabeleStaza) psf.getTblStaze().getModel();
+        model.azurirajStazu(staza);
+    }
+
 }

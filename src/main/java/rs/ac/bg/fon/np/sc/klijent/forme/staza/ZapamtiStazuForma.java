@@ -205,7 +205,5 @@ public class ZapamtiStazuForma extends OpstaEkranskaForma {
     public javax.swing.JTextField getTxtSifraStaze() {
         return txtSifraStaze;
     }
-    
-    
 
 }
