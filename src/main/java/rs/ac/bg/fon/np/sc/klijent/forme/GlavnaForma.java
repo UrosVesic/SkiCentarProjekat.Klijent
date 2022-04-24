@@ -6,6 +6,8 @@
 package rs.ac.bg.fon.np.sc.klijent.forme;
 
 import javax.swing.JFrame;
+import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.PromeniSkiCentarForma;
+import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.ZapamtiSkiCentarForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.PretraziSkiKarteForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.ZapamtiSkiKartuForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.PronadjiStazeForma;
@@ -190,6 +192,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiKreirajNoviSkiCentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajNoviSkiCentarActionPerformed
         // TODO add your handling code here:
+        new ZapamtiSkiCentarForma().setVisible(true);
     }//GEN-LAST:event_jmiKreirajNoviSkiCentarActionPerformed
 
     private void jmiKreirajNovuStazuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajNovuStazuActionPerformed
@@ -204,6 +207,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiIzmeniSkiCentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiCentarActionPerformed
         // TODO add your handling code here:
+        new PromeniSkiCentarForma().setVisible(true);
     }//GEN-LAST:event_jmiIzmeniSkiCentarActionPerformed
 
     private void jmiKreirajNovuZicaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajNovuZicaruActionPerformed
