@@ -232,4 +232,42 @@ public abstract class OpstiKontrolerKI {
 
     }
 
+    public void soPretraziSkiCentar() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_CENTAR, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski centar");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski centar: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski centar: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void soPromeniSkiCentar() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PROMENI_SKI_CENTAR, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je promenio ski centar");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski centar: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski centar: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
