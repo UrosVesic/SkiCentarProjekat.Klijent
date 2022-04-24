@@ -10,6 +10,7 @@ import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.PretraziSkiKarteForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.ZapamtiSkiKartuForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.PronadjiStazeForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.ZapamtiStazuForma;
+import rs.ac.bg.fon.np.sc.klijent.forme.zicara.ZapamtiZicaruForma;
 import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
 
 /**
@@ -207,6 +208,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiKreirajNovuZicaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajNovuZicaruActionPerformed
         // TODO add your handling code here:
+        new ZapamtiZicaruForma().setVisible(true);
     }//GEN-LAST:event_jmiKreirajNovuZicaruActionPerformed
 
     private void jmiKreirajSkiKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKreirajSkiKartuActionPerformed
