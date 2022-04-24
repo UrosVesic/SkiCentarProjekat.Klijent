@@ -74,7 +74,7 @@ public abstract class OpstiKontrolerKI {
 
     public void SOZapamtiSkiKartu() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_KARTU, objekat);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
@@ -210,6 +210,26 @@ public abstract class OpstiKontrolerKI {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void soZapamtiSkiCentar() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
 }
