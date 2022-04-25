@@ -72,6 +72,21 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public void soUcitajListuSkiKarata() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_KARATA, null);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+            } else {
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
     public void SOZapamtiSkiKartu() {
         KonvertujGrafickiObjekatUJson();
         Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_KARTU, objekat);
@@ -269,5 +284,33 @@ public abstract class OpstiKontrolerKI {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski centar: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void soZapamtiSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_PAS, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void promeniCenu() {
+
+    }
+
+    public void prikaziPorukuOGresci(String message) {
+        JOptionPane.showMessageDialog(oef, message, "Greska", JOptionPane.ERROR_MESSAGE);
     }
 }
