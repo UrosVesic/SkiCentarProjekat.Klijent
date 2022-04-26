@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,6 +52,7 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         obj.addProperty("ukupnaCena", zspf.getTxtUkupnaCena().getText());
         obj.addProperty("imePrezimeKupca", zspf.getTxtImePrezimeKupca().getText());
         obj.addProperty("datumIzdavanja", zspf.getTxtDatumIzdavanja().getText());
+        obj.addProperty("sezona", zspf.getTxtSezona().getText());
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) zspf.getTblStavkeSkiPasa().getModel();
         JsonArray arr = new JsonArray();
         for (StavkaSkiPasa stavkaSkiPasa : model.getSkiPas().getStavkeSkiPasa()) {
@@ -106,6 +108,7 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             skiPas.setDatumIzdavanja(sdf.parse(zspf.getTxtDatumIzdavanja().getText()));
+            skiPas.setSezona(zspf.getTxtSezona().getText());
             StavkaSkiPasa stavka = new StavkaSkiPasa();
             stavka.setPocetakVazenja(sdf.parse(zspf.getTxtPocetakVazenja().getText()));
             stavka.setSkiKarta((SkiKarta) zspf.getCmbSkiKarte().getSelectedItem());
@@ -150,6 +153,25 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
     public void promeniCenu() {
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) zspf.getTblStavkeSkiPasa().getModel();
         zspf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
+    }
+
+    public void izracunajSezonu() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date izdavanje = sdf.parse(zspf.getTxtDatumIzdavanja().getText());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(izdavanje);
+            int mesec = calendar.get(Calendar.MONTH);
+            int godina = calendar.get(Calendar.YEAR);
+            if (mesec > 5) {
+
+                zspf.getTxtSezona().setText(godina + "/" + (godina + 1));
+            } else {
+                zspf.getTxtSezona().setText((godina - 1) + "/" + godina);
+            }
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
