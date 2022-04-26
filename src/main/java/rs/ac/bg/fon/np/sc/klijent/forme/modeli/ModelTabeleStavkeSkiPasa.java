@@ -80,7 +80,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
 
     public void dodaj(StavkaSkiPasa stavka) throws Exception {
         Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
-                .validirajDaLiJeDatumStavkePosleIzdavanja(stavka, skiPas, "Stavka mora biti nakon datuma izdavanja")
+                .validirajDaLiJeDatumStavkeUSezoni(stavka, skiPas, "Stavka mora biti u istoj sezoni kad i ski pas")
                 .throwIfInvalide();
         if (skiPas.getStavkeSkiPasa().size() > 0) {
             stavka.setRedniBroj(skiPas.getStavkeSkiPasa().get(skiPas.getStavkeSkiPasa().size() - 1).getRedniBroj() + 1);
