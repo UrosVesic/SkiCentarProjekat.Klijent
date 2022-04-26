@@ -298,7 +298,6 @@ public abstract class OpstiKontrolerKI {
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
             } else {
                 JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
-                throw odgovor.getException();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
