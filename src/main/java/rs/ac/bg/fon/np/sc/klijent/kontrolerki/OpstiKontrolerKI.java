@@ -305,6 +305,25 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
+    public void soPretraziSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PASOVE, objekat);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                objekat = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pasove");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski pasove: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi pasove: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void promeniCenu() {
 
     }
