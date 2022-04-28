@@ -10,6 +10,7 @@ import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.PromeniSkiCentarForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.ZapamtiSkiCentarForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.PretraziSkiKarteForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.ZapamtiSkiKartuForma;
+import rs.ac.bg.fon.np.sc.klijent.forme.skipas.PronadjiSkiPasoveForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skipas.ZapamtiSkiPasForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.PronadjiStazeForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.ZapamtiStazuForma;
@@ -233,6 +234,7 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     private void jmiIzmeniSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiIzmeniSkiPasActionPerformed
         // TODO add your handling code here:
+        new PronadjiSkiPasoveForma().setVisible(true);
     }//GEN-LAST:event_jmiIzmeniSkiPasActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
