@@ -30,14 +30,14 @@ public class KontrolerKIPretraziSkiKarte extends OpstiKontrolerKI {
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
         obj.addProperty("cenaSkiKarte", new BigDecimal(pskf.getTxtGornjaCena().getText()));
-        objekat = gson.toJson(obj);
+        jsonString = gson.toJson(obj);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
         Gson gson = new Gson();
-        niz = gson.fromJson(objekat, SkiKarta[].class);
+        niz = gson.fromJson(jsonString, SkiKarta[].class);
         ModelTabeleSkiKarte model = (ModelTabeleSkiKarte) pskf.getTblSkiKarte().getModel();
         model.setSkiKarte((SkiKarta[]) niz);
 
