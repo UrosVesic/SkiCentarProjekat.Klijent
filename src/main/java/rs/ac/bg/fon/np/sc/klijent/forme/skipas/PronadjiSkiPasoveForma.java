@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.forme.skipas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
@@ -120,12 +121,12 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
-        /*try {
+        try {
             // TODO add your handling code here:
             new IzmeniSkiPasForma(kkipsp.vratiSelektovanSP(), this).setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Izaberite red u tabeli");
-        }*/
+        }
     }//GEN-LAST:event_btnIzmeniActionPerformed
 
     private void btnPronadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiActionPerformed
