@@ -47,43 +47,31 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd").create();
         JsonObject obj = new JsonObject();
         obj.addProperty("ukupnaCena", zspf.getTxtUkupnaCena().getText());
         obj.addProperty("imePrezimeKupca", zspf.getTxtImePrezimeKupca().getText());
         obj.addProperty("datumIzdavanja", zspf.getTxtDatumIzdavanja().getText());
         obj.addProperty("sezona", zspf.getTxtSezona().getText());
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) zspf.getTblStavkeSkiPasa().getModel();
-        JsonArray arr = new JsonArray();
-        for (StavkaSkiPasa stavkaSkiPasa : model.getSkiPas().getStavkeSkiPasa()) {
-            JsonObject stavkaObj = new JsonObject();
-            JsonObject skiKartaObj = (JsonObject) gson.toJsonTree(stavkaSkiPasa.getSkiKarta());
-            JsonObject skiPasObj = new JsonObject();
-            skiPasObj.addProperty("sifraSkiPasa", stavkaSkiPasa.getSkiPas().getSifraSkiPasa());
-            stavkaObj.add("skiKarta", skiKartaObj);
-            stavkaObj.add("skiPas", skiPasObj);
-            stavkaObj.addProperty("vrednostStavke", stavkaSkiPasa.getVrednostStavke());
-            stavkaObj.addProperty("pocetakVazenja", sdf.format(stavkaSkiPasa.getPocetakVazenja()));
-            stavkaObj.addProperty("zavrsetakVazenja", sdf.format(stavkaSkiPasa.getZavrsetakVazenja()));
-            arr.add(stavkaObj);
-        }
+        JsonArray arr = (JsonArray) gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa());
         obj.add("stavkeSkiPasa", arr);
-        objekat = gson.toJson(obj);
+        jsonString = gson.toJson(obj);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         Gson gson = new Gson();
-        JsonObject obj = gson.fromJson(objekat, JsonObject.class);
+        JsonObject obj = gson.fromJson(jsonString, JsonObject.class);
         zspf.getTxtSifraSkiPasa().setText(obj.get("sifraSkiPasa").getAsString());
     }
 
-    public void pripremiTabelu() {
+    public void pripremiFormu() {
         zspf.getTblStavkeSkiPasa().setModel(new ModelTabeleStavkeSkiPasa(new SkiPas(), this));
         Gson gson = new Gson();
         try {
             soUcitajListuSkiKarata();
-            niz = gson.fromJson(objekat, SkiKarta[].class);
+            niz = gson.fromJson(jsonString, SkiKarta[].class);
             pripremiKomboboks();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje liste ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
