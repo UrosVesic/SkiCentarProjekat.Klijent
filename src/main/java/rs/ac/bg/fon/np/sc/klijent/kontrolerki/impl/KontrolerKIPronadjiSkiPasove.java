@@ -32,19 +32,29 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
         obj.addProperty("imePrezimeKupca", pspf.getTxtImePrezimeKupca().getText());
-        objekat = gson.toJson(obj);
+        jsonString = gson.toJson(obj);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         Gson gson = new Gson();
-        niz = gson.fromJson(objekat, SkiPas[].class);
+        niz = gson.fromJson(jsonString, SkiPas[].class);
         ModelTabeleSkiPas model = (ModelTabeleSkiPas) pspf.getTblSkiPasevi().getModel();
         model.setSkiPasevi((SkiPas[]) niz);
     }
 
     public void pripremiTabelu() {
         pspf.getTblSkiPasevi().setModel(new ModelTabeleSkiPas());
+    }
+
+    public long vratiSelektovanSP() throws Exception{
+        int row = pspf.getTblSkiPasevi().getSelectedRow();
+        if (row == -1) {
+            throw new Exception();
+        }
+        ModelTabeleSkiPas model = (ModelTabeleSkiPas) pspf.getTblSkiPasevi().getModel();
+        SkiPas[] skiPasevi = model.getSkiPasevi();
+        return skiPasevi[row].getSifraSkiPasa();
     }
 
 }
