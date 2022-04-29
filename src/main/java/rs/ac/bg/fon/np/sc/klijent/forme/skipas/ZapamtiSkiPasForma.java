@@ -336,7 +336,7 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
     // End of variables declaration//GEN-END:variables
 
     private void pripremiTabelu() {
-        kkiksp.pripremiTabelu();
+        kkiksp.pripremiFormu();
 
     }
 
