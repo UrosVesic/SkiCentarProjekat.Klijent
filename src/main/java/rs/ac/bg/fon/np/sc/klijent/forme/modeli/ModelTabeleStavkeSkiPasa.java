@@ -82,11 +82,6 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
         Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
                 .validirajDaLiJeDatumStavkeUSezoni(stavka, skiPas, "Stavka mora biti u istoj sezoni kad i ski pas")
                 .throwIfInvalide();
-        if (skiPas.getStavkeSkiPasa().size() > 0) {
-            stavka.setRedniBroj(skiPas.getStavkeSkiPasa().get(skiPas.getStavkeSkiPasa().size() - 1).getRedniBroj() + 1);
-        } else {
-            stavka.setRedniBroj(1);
-        }
 
         skiPas.getStavkeSkiPasa().add(stavka);
         fireTableDataChanged();
@@ -105,7 +100,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
                     stavkaSkiPasa.setPocetakVazenja(sdf.parse((String) aValue));
                     stavkaSkiPasa.generisiDatumZavrsetka();
                 } catch (ParseException ex) {
-                    ok.prikaziPorukuOGresci("Datum mora biri u formatu dd.MM.gggg");
+                    ok.prikaziPorukuOGresci("Datum mora biri u formatu gggg-MM-dd");
                 } catch (ValidationException ex) {
                     ok.prikaziPorukuOGresci(ex.getMessage());
                 }
