@@ -113,7 +113,7 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
                 stavka.setVrednostStavke(BigDecimal.ZERO);
             }
             model.dodaj(stavka);
-            ispf.getTxtUkupnaCena().setText(postaviCenu(model.getSkiPas().getStavkeSkiPasa()));
+            ispf.getTxtUkupnaCena().setText(promeniCenu(model.getSkiPas().getStavkeSkiPasa()));
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(ispf, "Datum mora biti unesen u formatu dd.MM.gggg");
             Logger.getLogger(ZapamtiSkiPasForma.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,8 +122,8 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
             ex.printStackTrace();
         }
     }
-
-    private String postaviCenu(List<StavkaSkiPasa> stavkeSkiPasa) {
+    
+    public String promeniCenu(List<StavkaSkiPasa> stavkeSkiPasa) {
         BigDecimal cena = new BigDecimal(0);
         for (StavkaSkiPasa stavkaSkiPasa : stavkeSkiPasa) {
             cena = cena.add(stavkaSkiPasa.getVrednostStavke());
@@ -131,6 +131,14 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         return cena + "";
     }
 
+    @Override
+    public void promeniCenu() {
+        ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
+        ispf.getTxtUkupnaCena().setText(promeniCenu(model.getSkiPas().getStavkeSkiPasa()));
+    }
+    
+    
+    
     public void ObrisiStavku() {
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
         if (ispf.getTblStavkeSkiPasa().getSelectedRow() == -1) {
