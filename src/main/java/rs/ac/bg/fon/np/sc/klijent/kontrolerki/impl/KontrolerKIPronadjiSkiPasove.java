@@ -31,7 +31,12 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
-        obj.addProperty("imePrezimeKupca", pspf.getTxtImePrezimeKupca().getText());
+        String[] imePrezime = pspf.getTxtImePrezimeKupca().getText().split(" ");
+        obj.addProperty("ime", imePrezime[0]);
+        try {
+            obj.addProperty("prezime", imePrezime[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
         jsonString = gson.toJson(obj);
     }
 
@@ -47,7 +52,7 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
         pspf.getTblSkiPasevi().setModel(new ModelTabeleSkiPas());
     }
 
-    public long vratiSelektovanSP() throws Exception{
+    public long vratiSelektovanSP() throws Exception {
         int row = pspf.getTblSkiPasevi().getSelectedRow();
         if (row == -1) {
             throw new Exception();
