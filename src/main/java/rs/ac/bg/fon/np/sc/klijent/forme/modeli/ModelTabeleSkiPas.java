@@ -18,7 +18,7 @@ import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
 public class ModelTabeleSkiPas extends AbstractTableModel {
 
     SkiPas[] skiPasevi;
-    String[] kolone = {"Sifra ski pasa", "Ukupna cena", "Ime i prezime kupca", "Datum izdavanja", "Sezona"};
+    String[] kolone = {"Sifra ski pasa", "Ukupna cena", "Kupac", "Datum izdavanja", "Sezona"};
 
     public ModelTabeleSkiPas() {
         skiPasevi = new SkiPas[0];
@@ -58,7 +58,7 @@ public class ModelTabeleSkiPas extends AbstractTableModel {
             case 1:
                 return skiPas.getUkupnaCena();
             case 2:
-                return skiPas.getImePrezimeKupca();
+                return skiPas.getKupac();
             case 3:
                 return sdf.format(skiPas.getDatumIzdavanja());
             case 4:
