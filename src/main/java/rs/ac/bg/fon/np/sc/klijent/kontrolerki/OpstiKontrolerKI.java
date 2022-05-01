@@ -68,7 +68,7 @@ public abstract class OpstiKontrolerKI {
                 throw odgovor.getException();
             }
         } catch (Exception ex) {
-            throw ex;
+            throw new Exception("Neuspesno ucitavanje liste ski centara");
         }
     }
 
@@ -83,7 +83,7 @@ public abstract class OpstiKontrolerKI {
                 throw odgovor.getException();
             }
         } catch (Exception ex) {
-            throw ex;
+            throw new Exception("Neuspesno ucitavanje liste ski karata");
         }
     }
 
@@ -369,4 +369,21 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski pas: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void soUcitajListuKupaca() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_KUPACA, null);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+            } else {
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            throw new Exception("Neuspesno ucitavanje kupaca");
+        }
+    }
+
+    
 }
