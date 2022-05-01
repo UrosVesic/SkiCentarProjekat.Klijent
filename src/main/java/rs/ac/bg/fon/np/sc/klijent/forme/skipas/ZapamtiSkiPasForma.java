@@ -5,9 +5,14 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.forme.skipas;
 
+import com.toedter.calendar.JDateChooser;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
@@ -29,8 +34,8 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
     public ZapamtiSkiPasForma() {
         initComponents();
         kkiksp = new KontrolerKIZapamtiSkiPas(this);
-        pripremiTabelu();
-        txtVrednostStavke.setText(((SkiKarta) cmbSkiKarte.getSelectedItem()).getCenaSkiKarte() + "");
+        pripremiFormu();
+
     }
 
     /**
@@ -47,25 +52,29 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
         jLabel2 = new javax.swing.JLabel();
         txtUkupnaCena = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtImePrezimeKupca = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtDatumIzdavanja = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStavkeSkiPasa = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtVrednostStavke = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtPocetakVazenja = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtZavrsetakVazenja = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         cmbSkiKarte = new javax.swing.JComboBox();
         btnDodaj = new javax.swing.JButton();
+        jdcPocetakVazenja = new com.toedter.calendar.JDateChooser();
+        jdcZavrsetakVazenja = new com.toedter.calendar.JDateChooser();
         btnZapamtiSkiPas = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtSezona = new javax.swing.JTextField();
+        jdcDatumIzdavanja = new com.toedter.calendar.JDateChooser();
+        cmbKupci = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDodajKupca = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        btnDodajKupca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Kreiraj ski pas");
@@ -78,13 +87,9 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
 
         txtUkupnaCena.setEditable(false);
 
-        jLabel3.setText("Ime i prezime kupca:");
-
-        txtImePrezimeKupca.setText("Pera Peric");
+        jLabel3.setText("Kupac: ");
 
         jLabel4.setText("Datum izdavanja: ");
-
-        txtDatumIzdavanja.setText("2020-01-01");
 
         tblStavkeSkiPasa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,11 +112,7 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
 
         jLabel6.setText("Pocetak vazenja: ");
 
-        txtPocetakVazenja.setText("2020-01-01");
-
         jLabel7.setText("Zavrsetak vazenja: ");
-
-        txtZavrsetakVazenja.setEditable(false);
 
         jLabel8.setText("Ski karta: ");
 
@@ -127,6 +128,8 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
                 btnDodajActionPerformed(evt);
             }
         });
+
+        jdcZavrsetakVazenja.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,9 +147,9 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
                     .addComponent(txtVrednostStavke, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdcPocetakVazenja, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbSkiKarte, javax.swing.GroupLayout.Alignment.LEADING, 0, 195, Short.MAX_VALUE)
-                            .addComponent(txtZavrsetakVazenja, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPocetakVazenja, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jdcZavrsetakVazenja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(26, 26, 26)
                         .addComponent(btnDodaj)))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -158,19 +161,19 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtVrednostStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
-                    .addComponent(txtPocetakVazenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdcPocetakVazenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtZavrsetakVazenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(btnDodaj)))
+                        .addComponent(btnDodaj))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jdcZavrsetakVazenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -194,6 +197,27 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
 
         jLabel9.setText("Sezona: ");
 
+        txtSezona.setEditable(false);
+
+        jdcDatumIzdavanja.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdcDatumIzdavanjaPropertyChange(evt);
+            }
+        });
+
+        txtDodajKupca.setColumns(20);
+        txtDodajKupca.setRows(5);
+        jScrollPane2.setViewportView(txtDodajKupca);
+
+        jLabel10.setText("Dodaj kupca: ");
+
+        btnDodajKupca.setText("Dodaj");
+        btnDodajKupca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDodajKupcaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,72 +225,79 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(396, 396, 396))
+                        .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(48, 48, 48)
-                                .addComponent(txtUkupnaCena, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jdcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtSezona, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cmbKupci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtUkupnaCena))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtImePrezimeKupca)
-                                    .addComponent(txtDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnDodajKupca))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtSezona, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtSifraSkiPasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtUkupnaCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cmbKupci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel9)
+                                .addComponent(txtSezona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdcDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtImePrezimeKupca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtSezona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(btnDodajKupca))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnZapamtiSkiPas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -276,7 +307,7 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
                         .addComponent(btnObrisi)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -290,8 +321,8 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
 
     private void btnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajActionPerformed
         // TODO add your handling code here:
-        if (txtSezona.getText().equals("")) {
-            kkiksp.izracunajSezonu();
+        if (jdcDatumIzdavanja.getDate() == null) {
+            kkiksp.postaviDatumIzdavanja();
         }
         kkiksp.dodajStavkuUTabelu();
 
@@ -307,13 +338,33 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
         kkiksp.ObrisiStavku();
     }//GEN-LAST:event_btnObrisiActionPerformed
 
+    private void jdcDatumIzdavanjaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdcDatumIzdavanjaPropertyChange
+        // TODO add your handling code here:
+        if (kkiksp != null) {
+            kkiksp.izracunajSezonu();
+            kkiksp.ograniciDatumStavki();
+        }
+    }//GEN-LAST:event_jdcDatumIzdavanjaPropertyChange
+
+    private void btnDodajKupcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajKupcaActionPerformed
+        try {
+            // TODO add your handling code here:
+            kkiksp.dodajKupca();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDodajKupcaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;
+    private javax.swing.JButton btnDodajKupca;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnZapamtiSkiPas;
+    private javax.swing.JComboBox cmbKupci;
     private javax.swing.JComboBox cmbSkiKarte;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -324,18 +375,19 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private com.toedter.calendar.JDateChooser jdcDatumIzdavanja;
+    private com.toedter.calendar.JDateChooser jdcPocetakVazenja;
+    private com.toedter.calendar.JDateChooser jdcZavrsetakVazenja;
     private javax.swing.JTable tblStavkeSkiPasa;
-    private javax.swing.JTextField txtDatumIzdavanja;
-    private javax.swing.JTextField txtImePrezimeKupca;
-    private javax.swing.JTextField txtPocetakVazenja;
+    private javax.swing.JTextArea txtDodajKupca;
     private javax.swing.JTextField txtSezona;
     private javax.swing.JTextField txtSifraSkiPasa;
     private javax.swing.JTextField txtUkupnaCena;
     private javax.swing.JTextField txtVrednostStavke;
-    private javax.swing.JTextField txtZavrsetakVazenja;
     // End of variables declaration//GEN-END:variables
 
-    private void pripremiTabelu() {
+    private void pripremiFormu() {
         kkiksp.pripremiFormu();
 
     }
@@ -343,6 +395,10 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
     @Override
     public OpstiDomenskiObjekat kreirajObjekat() {
         return new SkiPas();
+    }
+
+    public JTextArea getTxtDodajKupca() {
+        return txtDodajKupca;
     }
 
     public JButton getBtnZapamtiSkiPas() {
@@ -357,16 +413,8 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
         return tblStavkeSkiPasa;
     }
 
-    public JTextField getTxtDatumIzdavanja() {
-        return txtDatumIzdavanja;
-    }
-
-    public JTextField getTxtImePrezimeKupca() {
-        return txtImePrezimeKupca;
-    }
-
-    public JTextField getTxtPocetakVazenja() {
-        return txtPocetakVazenja;
+    public JComboBox getCmbKupci() {
+        return cmbKupci;
     }
 
     public JTextField getTxtSifraSkiPasa() {
@@ -381,8 +429,16 @@ public class ZapamtiSkiPasForma extends OpstaEkranskaForma {
         return txtVrednostStavke;
     }
 
-    public JTextField getTxtZavrsetakVazenja() {
-        return txtZavrsetakVazenja;
+    public JDateChooser getJdcDatumIzdavanja() {
+        return jdcDatumIzdavanja;
+    }
+
+    public JDateChooser getJdcPocetakVazenja() {
+        return jdcPocetakVazenja;
+    }
+
+    public JDateChooser getJdcZavrsetakVazenja() {
+        return jdcZavrsetakVazenja;
     }
 
     public JTextField getTxtSezona() {
