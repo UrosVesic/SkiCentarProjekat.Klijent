@@ -7,6 +7,9 @@ package rs.ac.bg.fon.np.sc.klijent.forme.modeli;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 import rs.ac.bg.fon.np.sc.commonlib.validator.ValidationException;
 import rs.ac.bg.fon.np.sc.commonlib.validator.Validator;
@@ -59,11 +62,11 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
             case 0:
                 return stavka.getVrednostStavke();
             case 1:
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
                 return sdf.format(stavka.getPocetakVazenja());
 
             case 2:
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                sdf = new SimpleDateFormat("dd.MM.yyyy");
                 return sdf.format(stavka.getZavrsetakVazenja());
 
             case 3:
@@ -91,33 +94,22 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         StavkaSkiPasa stavkaSkiPasa = skiPas.getStavkeSkiPasa().get(rowIndex);
+        Date prvobitni = stavkaSkiPasa.getPocetakVazenja();
         switch (columnIndex) {
             case 1:
-                try {
-                    StavkaSkiPasa stavka1 = new StavkaSkiPasa();
-                    stavka1.setPocetakVazenja(sdf.parse((String) aValue));
-                    Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka1, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
-                    stavkaSkiPasa.setPocetakVazenja(sdf.parse((String) aValue));
-                    stavkaSkiPasa.generisiDatumZavrsetka();
-                } catch (ParseException ex) {
-                    ok.prikaziPorukuOGresci("Datum mora biri u formatu gggg-MM-dd");
-                } catch (ValidationException ex) {
-                    ok.prikaziPorukuOGresci(ex.getMessage());
+                stavkaSkiPasa.setPocetakVazenja((Date) aValue);
+                 {
+                    try {
+                        Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavkaSkiPasa, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
+                        stavkaSkiPasa.generisiDatumZavrsetka();
+                    } catch (ValidationException ex) {
+                        stavkaSkiPasa.setPocetakVazenja(prvobitni);
+                        ok.prikaziPorukuOGresci(ex.getMessage());
+                    }
                 }
 
                 break;
-            case 2:
-                try {
-                    StavkaSkiPasa stavka1 = new StavkaSkiPasa();
-                    stavka1.setZavrsetakVazenja(sdf.parse((String) aValue));
-                    Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka1, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
-                    stavkaSkiPasa.setZavrsetakVazenja(sdf.parse((String) aValue));
-                } catch (ParseException ex) {
-                    ok.prikaziPorukuOGresci("Datum mora biri u formatu dd.MM.gggg");
-                } catch (ValidationException ex) {
-                    ok.prikaziPorukuOGresci(ex.getMessage());
-                }
-                break;
+
             case 3:
                 stavkaSkiPasa.setSkiKarta((SkiKarta) aValue);
                 stavkaSkiPasa.setVrednostStavke(((SkiKarta) aValue).getCenaSkiKarte());
