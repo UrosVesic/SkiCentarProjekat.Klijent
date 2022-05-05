@@ -62,4 +62,19 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
         return skiPasevi[row].getSifraSkiPasa();
     }
 
+    public void azurirajTabelu(SkiPas skiPas) {
+        ModelTabeleSkiPas model = (ModelTabeleSkiPas) pspf.getTblSkiPasevi().getModel();
+        SkiPas[] skiPasevi = model.getSkiPasevi();
+        for (SkiPas skiPas1 : skiPasevi) {
+            if (skiPas.equals(skiPas1)) {
+                skiPas1.setDatumIzdavanja(skiPas.getDatumIzdavanja());
+                skiPas1.setKupac(skiPas.getKupac());
+                skiPas1.setSezona(skiPas.getSezona());
+                skiPas1.setUkupnaCena(skiPas.getUkupnaCena());
+
+                model.fireTableDataChanged();
+            }
+        }
+    }
+
 }
