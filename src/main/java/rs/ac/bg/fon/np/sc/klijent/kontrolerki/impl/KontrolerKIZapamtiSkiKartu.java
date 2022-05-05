@@ -42,14 +42,14 @@ public class KontrolerKIZapamtiSkiKartu extends OpstiKontrolerKI {
         obj.addProperty("cenaSkiKarte", zskf.getTxtCenaSkiKarte().getText());
         obj1 = (JsonObject) gson.toJsonTree(zskf.getCmbSkiCentar().getSelectedItem());
         obj.add("skiCentar", obj1);
-        objekat = new Gson().toJson(obj);
-        System.out.println(objekat);
+        jsonString = new Gson().toJson(obj);
+        System.out.println(jsonString);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         Gson gson = new Gson();
-        SkiKarta skiKarta = gson.fromJson(objekat, SkiKarta.class);
+        SkiKarta skiKarta = gson.fromJson(jsonString, SkiKarta.class);
         ZapamtiSkiKartuForma zskf = (ZapamtiSkiKartuForma) oef;
         zskf.getTxtSifraSkiKarte().setText(skiKarta.getSifraSkiKarte() + "");
     }
@@ -60,7 +60,7 @@ public class KontrolerKIZapamtiSkiKartu extends OpstiKontrolerKI {
         zskf.getCmbSkiCentar().removeAllItems();
         try {
             soUcitajListuSkiCentara();
-            niz = gson.fromJson(objekat, SkiCentar[].class);
+            niz = gson.fromJson(jsonString, SkiCentar[].class);
             zskf.getCmbSkiCentar().setModel(new DefaultComboBoxModel(niz));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);

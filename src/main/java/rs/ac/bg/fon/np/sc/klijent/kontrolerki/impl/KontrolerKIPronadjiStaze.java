@@ -35,7 +35,7 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
         obj.addProperty("nazivSkiCentra", psf.getTxtSkiCentar().getText());
-        objekat = gson.toJson(obj);
+        jsonString = gson.toJson(obj);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
         Gson gson = new Gson();
         Type collectionType = new TypeToken<ArrayList<Staza>>() {
         }.getType();
-        List<Staza> staze = gson.fromJson(objekat, collectionType);
+        List<Staza> staze = gson.fromJson(jsonString, collectionType);
         ModelTabeleStaza model = new ModelTabeleStaza();
         model.setStaze(staze);
         psf.getTblStaze().setModel(model);

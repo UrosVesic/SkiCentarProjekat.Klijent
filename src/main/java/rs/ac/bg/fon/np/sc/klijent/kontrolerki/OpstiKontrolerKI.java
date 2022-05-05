@@ -24,7 +24,7 @@ import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
  */
 public abstract class OpstiKontrolerKI {
 
-    protected String objekat;
+    protected String jsonString;
     protected OpstaEkranskaForma oef;
     protected OpstiDomenskiObjekat[] niz;
 
@@ -37,13 +37,13 @@ public abstract class OpstiKontrolerKI {
 
     public boolean soPrijaviSe() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
-                Komunikacija.getInstanca().setTrenutniKorisnikJson(objekat);
+                jsonString = odgovor.getRezultat();
+                Komunikacija.getInstanca().setTrenutniKorisnikJson(jsonString);
                 oef.dispose();
                 return true;
             } else {
@@ -63,23 +63,38 @@ public abstract class OpstiKontrolerKI {
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
             } else {
                 throw odgovor.getException();
             }
         } catch (Exception ex) {
-            throw ex;
+            throw new Exception("Neuspesno ucitavanje liste ski centara");
+        }
+    }
+
+    public void soUcitajListuSkiKarata() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_SKI_KARATA, null);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+            } else {
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            throw new Exception("Neuspesno ucitavanje liste ski karata");
         }
     }
 
     public void SOZapamtiSkiKartu() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_KARTU, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_KARTU, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
             } else {
@@ -93,12 +108,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soPretraziKarte() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_KARTE, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_KARTE, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski karte");
             } else {
@@ -112,12 +127,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soZapamtiStazu() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_STAZU, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_STAZU, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
             } else {
@@ -132,12 +147,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soPretraziStaze() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZE, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_STAZE, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao staze");
             } else {
@@ -151,12 +166,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soUcitajStazu() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_STAZU, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_STAZU, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je ucitao stazu");
             } else {
@@ -171,12 +186,12 @@ public abstract class OpstiKontrolerKI {
     public void soPromeniStazu() throws Exception {
         int i = 0;
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PROMENI_STAZU, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PROMENI_STAZU, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio stazu");
             } else {
@@ -195,12 +210,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soZapamtiZicaru() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_ZICARU, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_ZICARU, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio zicaru");
             } else {
@@ -214,12 +229,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soZapamtiSkiCentar() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
             } else {
@@ -234,12 +249,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soPretraziSkiCentar() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_CENTAR, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_CENTAR, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski centar");
             } else {
@@ -253,12 +268,12 @@ public abstract class OpstiKontrolerKI {
 
     public void soPromeniSkiCentar() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PROMENI_SKI_CENTAR, objekat);
+        Zahtev zahtev = new Zahtev(Operacije.PROMENI_SKI_CENTAR, jsonString);
         Odgovor odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
             if (odgovor.isUspesno()) {
-                objekat = odgovor.getRezultat();
+                jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio ski centar");
             } else {
@@ -270,4 +285,105 @@ public abstract class OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski centar: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void soZapamtiSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_PAS, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void soPretraziSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PRETRAZI_SKI_PASOVE, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pasove");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski pasove: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi pasove: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void promeniCenu() {
+
+    }
+
+    public void prikaziPorukuOGresci(String message) {
+        JOptionPane.showMessageDialog(oef, message, "Greska", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void soUcitajSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_SKI_PAS, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je ucitao ski pas");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void soPromeniSkiPas() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.PROMENI_SKI_PAS, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                JOptionPane.showMessageDialog(oef, "Sistem je promenio ski pas");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski pas: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski pas: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void soUcitajListuKupaca() throws Exception {
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_LISTU_KUPACA, null);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+            } else {
+                throw odgovor.getException();
+            }
+        } catch (Exception ex) {
+            throw new Exception("Neuspesno ucitavanje kupaca");
+        }
+    }
+
+    
 }

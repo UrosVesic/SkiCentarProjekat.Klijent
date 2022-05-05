@@ -35,13 +35,13 @@ public class KontrolerKIPromeniSkiCentar extends OpstiKontrolerKI {
         obj.addProperty("nazivSkiCentra", pscf.getTxtNazivSkiCentra().getText());
         obj.addProperty("nazivPlanine", pscf.getTxtNazivPlanine().getText());
         obj.addProperty("radnoVreme", pscf.getTxtRadnoVreme().getText());
-        objekat = gson.toJson(obj);
+        jsonString = gson.toJson(obj);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         Gson gson = new Gson();
-        SkiCentar sc = gson.fromJson(objekat, SkiCentar.class);
+        SkiCentar sc = gson.fromJson(jsonString, SkiCentar.class);
         pscf.getTxtSifraSkiCentra().setText(sc.getSifraSkiCentra() + "");
         pscf.getTxtNazivSkiCentra().setText(sc.getNazivSkiCentra());
         pscf.getTxtNazivPlanine().setText(sc.getNazivPlanine());

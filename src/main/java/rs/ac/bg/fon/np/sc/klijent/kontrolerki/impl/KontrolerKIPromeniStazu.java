@@ -44,14 +44,14 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
         obj.addProperty("tipStaze", String.valueOf(psf.getCmbTipStaze().getSelectedItem()));
         JsonObject obj1 = (JsonObject) gson.toJsonTree(psf.getCmbSkiCentar().getSelectedItem());
         obj.add("skiCentar", obj1);
-        objekat = gson.toJson(obj);
-        staza = gson.fromJson(objekat, Staza.class);
+        jsonString = gson.toJson(obj);
+        staza = gson.fromJson(jsonString, Staza.class);
     }
 
     @Override
     public void KonvertujJsonObjekatUGrafickeKomponente() {
         Gson gson = new Gson();
-        JsonObject obj = gson.fromJson(objekat, JsonObject.class);
+        JsonObject obj = gson.fromJson(jsonString, JsonObject.class);
         psf.getTxtSifraStaze().setText(obj.get("idStaze").getAsLong() + "");
     }
 
@@ -60,7 +60,7 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
         psf.getCmbSkiCentar().removeAllItems();
         try {
             soUcitajListuSkiCentara();
-            niz = gson.fromJson(objekat, SkiCentar[].class);
+            niz = gson.fromJson(jsonString, SkiCentar[].class);
             psf.getCmbSkiCentar().setModel(new DefaultComboBoxModel(niz));
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita listu ski centara: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
