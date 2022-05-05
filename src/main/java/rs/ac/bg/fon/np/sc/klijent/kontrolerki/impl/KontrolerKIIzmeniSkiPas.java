@@ -24,11 +24,12 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-import rs.ac.bg.fon.np.sc.commonLib.domen.Kupac;
+import rs.ac.bg.fon.np.sc.commonlib.domen.Kupac;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.commonlib.domen.StavkaSkiPasa;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
+import rs.ac.bg.fon.np.sc.klijent.forme.editori.DateCellEditor;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
 import rs.ac.bg.fon.np.sc.klijent.forme.skipas.IzmeniSkiPasForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skipas.ZapamtiSkiPasForma;
@@ -47,15 +48,20 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         ispf = (IzmeniSkiPasForma) oef;
     }
 
+    public String getJsonString() {
+        return jsonString;
+    }
+
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd").create();
         JsonObject obj = new JsonObject();
-        obj.addProperty("ukupnaCena", ispf.getTxtUkupnaCena().getText());
+        obj.addProperty("sifraSkiPasa", ispf.getTxtSifraSkiPasa().getText());
+        obj.addProperty("ukupnaCena", (ispf.getTxtUkupnaCena().getText().equals("") ? null : ispf.getTxtUkupnaCena().getText()));
         JsonElement jsonKupac = gson.toJsonTree((Kupac) ispf.getCmbKupci().getSelectedItem());
         obj.add("kupac", jsonKupac);
-        obj.addProperty("datumIzdavanja", sdf.format(ispf.getJdcDatumIzdavanje().getDate()));
+        obj.addProperty("datumIzdavanja", (ispf.getJdcDatumIzdavanje().getDate() == null ? null : sdf.format(ispf.getJdcDatumIzdavanje().getDate())));
         obj.addProperty("sezona", ispf.getTxtSezona().getText());
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
         JsonArray arr = (JsonArray) gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa());
@@ -85,9 +91,13 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         try {
             soUcitajListuSkiKarata();
             niz = gson.fromJson(jsonString, SkiKarta[].class);
-            pripremiKomboBoks();
+            pripremiKomboBoksSkiKarte();
+            soUcitajListuKupaca();
+            niz = gson.fromJson(jsonString, Kupac[].class);
+            pripremiKomboBoksKupci();
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje liste ski centara", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(oef, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -95,10 +105,19 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
 
         TableColumn tcSkiCentar = ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(3);
         tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
+
+        TableColumn tcPocetakVazenja = ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(1);
+        DateCellEditor dateCellEditor = new DateCellEditor();
+        dateCellEditor.setMinSelectableDate(ispf.getJdcDatumIzdavanje().getDate());
+        tcPocetakVazenja.setCellEditor(dateCellEditor);
     }
 
-    public void pripremiKomboBoks() {
+    public void pripremiKomboBoksSkiKarte() {
         ispf.getCmbSkiKarte().setModel(new DefaultComboBoxModel(niz));
+    }
+
+    public void pripremiKomboBoksKupci() {
+        ispf.getCmbKupci().setModel(new DefaultComboBoxModel(niz));
     }
 
     public void dodajStavkuUTabelu() {
@@ -173,6 +192,8 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
 
     public void ograniciDatumStavki() {
         ispf.getJdcPocetakVazenja().setMinSelectableDate(ispf.getJdcDatumIzdavanje().getDate());
+        DateCellEditor dateCellEditor = (DateCellEditor) ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(1).getCellEditor();
+        dateCellEditor.setMinSelectableDate(ispf.getJdcDatumIzdavanje().getDate());
     }
 
 }
