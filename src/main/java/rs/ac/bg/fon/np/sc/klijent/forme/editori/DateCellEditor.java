@@ -3,6 +3,7 @@ package rs.ac.bg.fon.np.sc.klijent.forme.editori;
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.Locale;
 import javax.swing.AbstractCellEditor;
@@ -79,5 +80,9 @@ public class DateCellEditor extends AbstractCellEditor implements TableCellEdito
             //This last one is optional. It fits the row height to the JDateChooser preferred height.
         }
         return editor;
+    }
+
+    public void setMinSelectableDate(Date date) {
+        editor.setMinSelectableDate(date);
     }
 }
