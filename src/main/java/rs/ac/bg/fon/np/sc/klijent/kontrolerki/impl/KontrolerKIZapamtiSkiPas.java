@@ -24,7 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-import rs.ac.bg.fon.np.sc.commonLib.domen.Kupac;
+import rs.ac.bg.fon.np.sc.commonlib.domen.Kupac;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.commonlib.domen.StavkaSkiPasa;
@@ -99,7 +99,9 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
 
         TableColumn tcPocetakVazenja = zspf.getTblStavkeSkiPasa().getColumnModel().getColumn(1);
-        tcPocetakVazenja.setCellEditor(new DateCellEditor());
+        DateCellEditor dateCellEditor = new DateCellEditor();
+        dateCellEditor.setMinSelectableDate(zspf.getJdcDatumIzdavanja().getDate());
+        tcPocetakVazenja.setCellEditor(dateCellEditor);
     }
 
     private void pripremiKomboboksSkiKarte() {
@@ -183,6 +185,8 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
 
     public void ograniciDatumStavki() {
         zspf.getJdcPocetakVazenja().setMinSelectableDate(zspf.getJdcDatumIzdavanja().getDate());
+        DateCellEditor dateCellEditor = (DateCellEditor) zspf.getTblStavkeSkiPasa().getColumnModel().getColumn(1).getCellEditor();
+        dateCellEditor.setMinSelectableDate(zspf.getJdcDatumIzdavanja().getDate());
     }
 
     public void dodajKupca() throws Exception {
