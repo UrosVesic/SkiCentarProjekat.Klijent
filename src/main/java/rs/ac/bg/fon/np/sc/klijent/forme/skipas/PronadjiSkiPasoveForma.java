@@ -158,7 +158,7 @@ public class PronadjiSkiPasoveForma extends OpstaEkranskaForma {
     }
 
     void azurirajTabelu(SkiPas skiPas) {
-        //kkipsp.azurirajTabelu(skiPas);
+        kkipsp.azurirajTabelu(skiPas);
     }
 
 }
