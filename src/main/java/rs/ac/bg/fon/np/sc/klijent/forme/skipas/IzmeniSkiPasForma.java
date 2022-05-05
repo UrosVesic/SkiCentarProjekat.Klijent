@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.forme.skipas;
 
+import com.google.gson.GsonBuilder;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -293,7 +294,8 @@ public class IzmeniSkiPasForma extends OpstaEkranskaForma {
     private void btnZapamtiSkiPasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZapamtiSkiPasActionPerformed
         // TODO add your handling code here:
         kkiisp.soPromeniSkiPas();
-        //pspf.azurirajTabelu((SkiPas) kkiisp.getOdo());
+        SkiPas skiPas = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("MMM dd, yyyy").create().fromJson(kkiisp.getJsonString(), SkiPas.class);
+        pspf.azurirajTabelu(skiPas);
     }//GEN-LAST:event_btnZapamtiSkiPasActionPerformed
 
     private void cmbSkiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSkiKarteActionPerformed
