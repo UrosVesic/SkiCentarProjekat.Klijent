@@ -91,6 +91,10 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
         try {
             soUcitajListuSkiKarata();
             niz = gson.fromJson(jsonString, SkiKarta[].class);
+            JComboBox cmbSkiCentri = new JComboBox(niz);
+
+            TableColumn tcSkiCentar = ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(3);
+            tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
             pripremiKomboBoksSkiKarte();
             soUcitajListuKupaca();
             niz = gson.fromJson(jsonString, Kupac[].class);
@@ -100,11 +104,6 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
             JOptionPane.showMessageDialog(oef, ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        JComboBox cmbSkiCentri = new JComboBox(niz);
-
-        TableColumn tcSkiCentar = ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(3);
-        tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
 
         TableColumn tcPocetakVazenja = ispf.getTblStavkeSkiPasa().getColumnModel().getColumn(1);
         DateCellEditor dateCellEditor = new DateCellEditor();

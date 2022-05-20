@@ -84,6 +84,10 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
             soUcitajListuSkiKarata();
             niz = gson.fromJson(jsonString, SkiKarta[].class);
             pripremiKomboboksSkiKarte();
+            JComboBox cmbSkiCentri = new JComboBox(niz);
+
+            TableColumn tcSkiCentar = zspf.getTblStavkeSkiPasa().getColumnModel().getColumn(3);
+            tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
             soUcitajListuKupaca();
             niz = gson.fromJson(jsonString, Kupac[].class);
             pripremiKomboboksKupci();
@@ -93,10 +97,6 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         }
 
         zspf.getTxtVrednostStavke().setText(((SkiKarta) zspf.getCmbSkiKarte().getSelectedItem()).getCenaSkiKarte() + "");
-        JComboBox cmbSkiCentri = new JComboBox(niz);
-
-        TableColumn tcSkiCentar = zspf.getTblStavkeSkiPasa().getColumnModel().getColumn(3);
-        tcSkiCentar.setCellEditor(new DefaultCellEditor(cmbSkiCentri));
 
         TableColumn tcPocetakVazenja = zspf.getTblStavkeSkiPasa().getColumnModel().getColumn(1);
         DateCellEditor dateCellEditor = new DateCellEditor();
