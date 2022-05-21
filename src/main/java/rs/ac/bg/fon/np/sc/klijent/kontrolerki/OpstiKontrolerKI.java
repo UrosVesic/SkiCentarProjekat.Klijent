@@ -277,7 +277,6 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio ski centar");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski centar: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
                 throw odgovor.getException();
             }
         } catch (Exception ex) {
