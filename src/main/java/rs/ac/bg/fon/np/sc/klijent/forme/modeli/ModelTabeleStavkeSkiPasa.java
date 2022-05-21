@@ -82,8 +82,8 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
     }
 
     public void dodaj(StavkaSkiPasa stavka) throws Exception {
-        Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
-                .validirajDaLiJeDatumStavkeUSezoni(stavka, skiPas, "Stavka mora biti u istoj sezoni kad i ski pas")
+        Validator.startValidation().validateIfItemsExistForPeriod(stavka, skiPas, "Vec postoje karte za izabrani period")
+                .validateIfDateIsInSeason(stavka.getPocetakVazenja(), skiPas.getSezona(), "Stavka mora biti u istoj sezoni kad i ski pas")
                 .throwIfInvalide();
 
         skiPas.getStavkeSkiPasa().add(stavka);
@@ -100,7 +100,7 @@ public class ModelTabeleStavkeSkiPasa extends AbstractTableModel {
                 stavkaSkiPasa.setPocetakVazenja((Date) aValue);
                  {
                     try {
-                        Validator.startValidation().validirajDaLiPostojeStavkeZaPeriod(stavkaSkiPasa, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
+                        Validator.startValidation().validateIfItemsExistForPeriod(stavkaSkiPasa, skiPas, "Vec postoje karte za izabrani period").throwIfInvalide();
                         stavkaSkiPasa.generisiDatumZavrsetka();
                     } catch (ValidationException ex) {
                         stavkaSkiPasa.setPocetakVazenja(prvobitni);
