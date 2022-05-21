@@ -56,12 +56,12 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd").create();
         JsonObject obj = new JsonObject();
-        obj.addProperty("ukupnaCena", zspf.getTxtUkupnaCena().getText());
+        obj.addProperty("ukupnaCena", (zspf.getTxtUkupnaCena().getText().isEmpty() ? null : zspf.getTxtUkupnaCena().getText()));
         Kupac kupac = (Kupac) zspf.getCmbKupci().getSelectedItem();
         JsonObject jsonKupac = (JsonObject) gson.toJsonTree(kupac);
         obj.add("kupac", jsonKupac);
-        obj.addProperty("datumIzdavanja", sdf.format(zspf.getJdcDatumIzdavanja().getDate()));
-        obj.addProperty("sezona", zspf.getTxtSezona().getText());
+        obj.addProperty("datumIzdavanja", (zspf.getJdcDatumIzdavanja().getDate() == null ? null : sdf.format(zspf.getJdcDatumIzdavanja().getDate())));
+        obj.addProperty("sezona", (zspf.getTxtSezona().getText().isEmpty() ? null : zspf.getTxtSezona().getText()));
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) zspf.getTblStavkeSkiPasa().getModel();
         JsonArray arr = (JsonArray) gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa());
         obj.add("stavkeSkiPasa", arr);

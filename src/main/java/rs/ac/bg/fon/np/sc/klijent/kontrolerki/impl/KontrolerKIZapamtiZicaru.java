@@ -33,7 +33,7 @@ public class KontrolerKIZapamtiZicaru extends OpstiKontrolerKI {
         JsonObject obj = new JsonObject();
         obj.addProperty("nazivZicare", zzf.getTxtNazivZicare().getText());
         obj.addProperty("radnoVreme", zzf.getTxtRadnoVreme().getText());
-        obj.addProperty("kapacitet", Integer.parseInt(zzf.getTxtKapacitet().getText()));
+        obj.addProperty("kapacitet", (zzf.getTxtKapacitet().getText().isEmpty() ? null : Integer.parseInt(zzf.getTxtKapacitet().getText())));
         obj.addProperty("UFunkciji", (String) zzf.getCmbUfunkciji().getSelectedItem());
         JsonObject skiCentar = (JsonObject) gson.toJsonTree(zzf.getCmbSkiCentri().getSelectedItem());
         obj.add("skiCentar", skiCentar);
