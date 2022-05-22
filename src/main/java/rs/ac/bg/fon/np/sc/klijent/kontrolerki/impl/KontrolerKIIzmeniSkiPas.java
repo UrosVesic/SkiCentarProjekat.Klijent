@@ -113,10 +113,16 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
 
     public void pripremiKomboBoksSkiKarte() {
         ispf.getCmbSkiKarte().setModel(new DefaultComboBoxModel(niz));
+        if (niz.length > 0) {
+            ispf.getCmbSkiKarte().setSelectedIndex(0);
+        }
     }
 
     public void pripremiKomboBoksKupci() {
         ispf.getCmbKupci().setModel(new DefaultComboBoxModel(niz));
+        if (niz.length > 0) {
+            ispf.getCmbSkiKarte().setSelectedIndex(0);
+        }
     }
 
     public void dodajStavkuUTabelu() {
