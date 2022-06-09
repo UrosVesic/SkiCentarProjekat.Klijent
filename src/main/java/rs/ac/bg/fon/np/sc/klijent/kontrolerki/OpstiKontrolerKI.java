@@ -6,7 +6,9 @@
 package rs.ac.bg.fon.np.sc.klijent.kontrolerki;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,16 +26,15 @@ import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
  */
 public abstract class OpstiKontrolerKI {
 
+    protected JsonObject obj;
     protected String jsonString;
     protected OpstaEkranskaForma oef;
     protected OpstiDomenskiObjekat[] niz;
+    protected final Gson gson = new Gson();
 
     public abstract void KonvertujGrafickiObjekatUJson();
 
     public abstract void KonvertujJsonObjekatUGrafickeKomponente();
-
-    public void isprazniGrafickiObjekat() {
-    }
 
     public void soZapamtiSvePodatkeOSkiCentru() {
         KonvertujGrafickiObjekatUJson();
@@ -44,7 +45,7 @@ public abstract class OpstiKontrolerKI {
             if (odgovor.isUspesno()) {
                 jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
-                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
             } else {
                 JOptionPane.showMessageDialog(oef, "Neuspesno pamcenje ski centra: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
@@ -74,17 +75,19 @@ public abstract class OpstiKontrolerKI {
 
     public boolean soPrijaviSe() {
         KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, jsonString);
-        Odgovor odgovor;
+        //Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, jsonString);
+        KonvertujOperacijuUJson(Operacije.PRIJAVI_SE);
+        String odgovor;
         try {
-            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
-            if (odgovor.isUspesno()) {
-                jsonString = odgovor.getRezultat();
-                Komunikacija.getInstanca().setTrenutniKorisnikJson(jsonString);
+            odgovor = Komunikacija.getInstanca().pozivSo(gson.toJson(obj));
+            JsonElement element = JsonParser.parseString(odgovor);
+            if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
+                Komunikacija.getInstanca().setTrenutniKorisnikJson(gson.fromJson(element.getAsJsonObject().get("rezultat"), Korisnik.class));
                 oef.dispose();
                 return true;
             } else {
-                JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                Exception ex = gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+                JOptionPane.showMessageDialog(oef, "Neuspesno prijavljivanje: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
         } catch (Exception ex) {
@@ -265,11 +268,12 @@ public abstract class OpstiKontrolerKI {
     }
 
     public void soZapamtiSkiCentar() {
-        KonvertujGrafickiObjekatUJson();
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, jsonString);
+        JsonObject obj = KonvertujGrafickiObjekatUJson();
+        KonvertujOperacijuUJson(Operacije.ZAPAMTI_SKI_CENTAR);
+        //Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR, jsonString);
         Odgovor odgovor;
         try {
-            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            odgovor = Komunikacija.getInstanca().pozivSo(gson.toJson(obj));
             if (odgovor.isUspesno()) {
                 jsonString = odgovor.getRezultat();
                 KonvertujJsonObjekatUGrafickeKomponente();
@@ -419,6 +423,10 @@ public abstract class OpstiKontrolerKI {
         } catch (Exception ex) {
             throw new Exception("Neuspesno ucitavanje kupaca");
         }
+    }
+
+    private void KonvertujOperacijuUJson(int op) {
+        obj.addProperty("operacija", op);
     }
 
 }
