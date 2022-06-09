@@ -18,7 +18,7 @@ import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
 public class ModelTabeleStaza extends AbstractTableModel {
 
     List<Staza> staze;
-    String[] kolone = new String[]{"ID staze", "Broj staze", "Naziv staze", "TIp staze", "Ski centar"};
+    String[] kolone = new String[]{"Broj staze", "Naziv staze", "TIp staze", "Ski centar"};
 
     public ModelTabeleStaza() {
         staze = new ArrayList<>();
@@ -47,15 +47,14 @@ public class ModelTabeleStaza extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Staza s = staze.get(rowIndex);
         switch (columnIndex) {
+
             case 0:
-                return s.getIdStaze();
-            case 1:
                 return s.getBrojStaze();
-            case 2:
+            case 1:
                 return s.getNazivStaze();
-            case 3:
+            case 2:
                 return s.getTipStaze();
-            case 4:
+            case 3:
                 return s.getSkiCentar();
             default:
                 return "Greska";
@@ -66,6 +65,9 @@ public class ModelTabeleStaza extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Staza s = staze.get(rowIndex);
         switch (columnIndex) {
+            case 0:
+                s.setBrojStaze((String) aValue);
+                break;
             case 1:
                 s.setNazivStaze((String) aValue);
                 break;
@@ -113,7 +115,7 @@ public class ModelTabeleStaza extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex > 0 && columnIndex < 3);
+        return true;
     }
 
     public void obrisi(int index) {
