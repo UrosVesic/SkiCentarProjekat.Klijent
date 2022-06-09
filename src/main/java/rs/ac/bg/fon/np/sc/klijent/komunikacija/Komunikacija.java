@@ -45,16 +45,14 @@ public class Komunikacija {
         }
         return instanca;
     }
-
-    public Odgovor pozivSo(Zahtev zahtev) throws Exception {
+    
+    public String pozivSo(String zahtev) throws Exception {
         new Posiljalac(socket).posalji(zahtev);
-        return (Odgovor) new Primalac(socket).primi();
+        return  (String) new Primalac(socket).primi();
     }
 
-    public void setTrenutniKorisnikJson(String json) {
-        Gson gson = new Gson();
-        Korisnik k = gson.fromJson(json, Korisnik.class);
-        trenutniKorisnik = k;
+    public void setTrenutniKorisnikJson(Korisnik korisnik) {
+        trenutniKorisnik = korisnik;
     }
 
 }
