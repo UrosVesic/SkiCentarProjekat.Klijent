@@ -35,6 +35,43 @@ public abstract class OpstiKontrolerKI {
     public void isprazniGrafickiObjekat() {
     }
 
+    public void soZapamtiSvePodatkeOSkiCentru() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_SKI_CENTAR_DETALJNIJE, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
+            } else {
+                JOptionPane.showMessageDialog(oef, "Neuspesno pamcenje ski centra: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Neuspesno pamcenje ski centra: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void SOUcitajSkiCentarDetalji() {
+        KonvertujGrafickiObjekatUJson();
+        Zahtev zahtev = new Zahtev(Operacije.UCITAJ_SKI_CENTAR_DETALJNIJE, jsonString);
+        Odgovor odgovor;
+        try {
+            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
+            if (odgovor.isUspesno()) {
+                jsonString = odgovor.getRezultat();
+                KonvertujJsonObjekatUGrafickeKomponente();
+            } else {
+                JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje ski centra: " + odgovor.getException().getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje ski centra: " + ex.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public boolean soPrijaviSe() {
         KonvertujGrafickiObjekatUJson();
         Zahtev zahtev = new Zahtev(Operacije.PRIJAVI_SE, jsonString);
@@ -384,5 +421,4 @@ public abstract class OpstiKontrolerKI {
         }
     }
 
-    
 }
