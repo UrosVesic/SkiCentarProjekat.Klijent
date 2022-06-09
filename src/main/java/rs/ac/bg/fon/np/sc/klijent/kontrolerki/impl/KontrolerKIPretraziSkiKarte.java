@@ -29,7 +29,7 @@ public class KontrolerKIPretraziSkiKarte extends OpstiKontrolerKI {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
         Gson gson = new Gson();
         JsonObject obj = new JsonObject();
-        obj.addProperty("cenaSkiKarte", new BigDecimal(pskf.getTxtGornjaCena().getText()));
+        obj.addProperty("cenaSkiKarte", pskf.getTxtGornjaCena().getText().isEmpty() ? null : new BigDecimal(pskf.getTxtGornjaCena().getText()));
         jsonString = gson.toJson(obj);
     }
 
