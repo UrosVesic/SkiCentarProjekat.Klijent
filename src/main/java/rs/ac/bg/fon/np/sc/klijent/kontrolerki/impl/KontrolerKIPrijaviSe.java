@@ -27,10 +27,12 @@ public class KontrolerKIPrijaviSe extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         PrijaviSeForma pf = (PrijaviSeForma) oef;
-        JsonObject obj = new JsonObject();
-        obj.addProperty("email", pf.getTxtEmail().getText());
-        obj.addProperty("sifra", String.valueOf(pf.getTxtSifra().getPassword()));
-        jsonString = new Gson().toJson(obj);
+        obj = new JsonObject();
+        JsonObject domObj = new JsonObject();
+        domObj.addProperty("email", pf.getTxtEmail().getText());
+        domObj.addProperty("sifra", String.valueOf(pf.getTxtSifra().getPassword()));
+        obj.add("korisnik", domObj);
+        //jsonString = new Gson().toJson(obj);
     }
 
     @Override
