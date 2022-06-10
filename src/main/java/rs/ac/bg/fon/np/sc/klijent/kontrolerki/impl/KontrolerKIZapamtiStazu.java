@@ -30,13 +30,13 @@ public class KontrolerKIZapamtiStazu extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("brojStaze", zsf.getTxtBrojStaze().getText());
-        obj.addProperty("nazivStaze", zsf.getTxtNazivStaze().getText());
-        obj.addProperty("tipStaze", String.valueOf(zsf.getCmbTipStaze().getSelectedItem()));
-        JsonObject obj1 = (JsonObject) gson.toJsonTree(zsf.getCmbSkiCentar().getSelectedItem());
-        obj.add("skiCentar", obj1);
-        jsonString = gson.toJson(obj);
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("brojStaze", zsf.getTxtBrojStaze().getText());
+        obj1.addProperty("nazivStaze", zsf.getTxtNazivStaze().getText());
+        obj1.addProperty("tipStaze", String.valueOf(zsf.getCmbTipStaze().getSelectedItem()));
+        obj1.add("skiCentar", gson.toJsonTree(zsf.getCmbSkiCentar().getSelectedItem()));
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

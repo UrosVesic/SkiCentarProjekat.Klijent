@@ -37,14 +37,13 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("idStaze", psf.getTxtSifraStaze().getText());
-        obj.addProperty("brojStaze", psf.getTxtBrojStaze().getText());
-        obj.addProperty("nazivStaze", psf.getTxtNazivStaze().getText());
-        obj.addProperty("tipStaze", String.valueOf(psf.getCmbTipStaze().getSelectedItem()));
-        JsonObject obj1 = (JsonObject) gson.toJsonTree(psf.getCmbSkiCentar().getSelectedItem());
-        obj.add("skiCentar", obj1);
-        jsonString = gson.toJson(obj);
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("idStaze", psf.getTxtSifraStaze().getText());
+        obj1.addProperty("brojStaze", psf.getTxtBrojStaze().getText());
+        obj1.addProperty("nazivStaze", psf.getTxtNazivStaze().getText());
+        obj1.addProperty("tipStaze", String.valueOf(psf.getCmbTipStaze().getSelectedItem()));
+        obj1.add("skiCentar", gson.toJsonTree(psf.getCmbSkiCentar().getSelectedItem()));
+        obj.add("parametar", obj1);
         staza = gson.fromJson(jsonString, Staza.class);
     }
 

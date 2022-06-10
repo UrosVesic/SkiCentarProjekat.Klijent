@@ -56,17 +56,18 @@ public class KontrolerKIIzmeniSkiPas extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUJson() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd").create();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("sifraSkiPasa", ispf.getTxtSifraSkiPasa().getText());
-        obj.addProperty("ukupnaCena", (ispf.getTxtUkupnaCena().getText().equals("") ? null : ispf.getTxtUkupnaCena().getText()));
-        JsonElement jsonKupac = gson.toJsonTree((Kupac) ispf.getCmbKupci().getSelectedItem());
-        obj.add("kupac", jsonKupac);
-        obj.addProperty("datumIzdavanja", (ispf.getJdcDatumIzdavanje().getDate() == null ? null : sdf.format(ispf.getJdcDatumIzdavanje().getDate())));
-        obj.addProperty("sezona", ispf.getTxtSezona().getText());
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("sifraSkiPasa", ispf.getTxtSifraSkiPasa().getText());
+        obj1.addProperty("ukupnaCena", (ispf.getTxtUkupnaCena().getText().equals("") ? null : ispf.getTxtUkupnaCena().getText()));
+        obj1.add("kupac", gson.toJsonTree((Kupac) ispf.getCmbKupci().getSelectedItem()));
+        obj1.addProperty("datumIzdavanja", (ispf.getJdcDatumIzdavanje().getDate() == null ? null : sdf.format(ispf.getJdcDatumIzdavanje().getDate())));
+        obj1.addProperty("sezona", ispf.getTxtSezona().getText());
+        
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) ispf.getTblStavkeSkiPasa().getModel();
-        JsonArray arr = (JsonArray) gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa());
-        obj.add("stavkeSkiPasa", arr);
-        jsonString = gson.toJson(obj);
+        obj1.add("stavkeSkiPasa", gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa()));
+        
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

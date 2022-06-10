@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,9 +29,7 @@ import rs.ac.bg.fon.np.sc.commonlib.domen.Kupac;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.commonlib.domen.StavkaSkiPasa;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Odgovor;
 import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Operacije;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Zahtev;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.editori.DateCellEditor;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleStavkeSkiPasa;
@@ -55,17 +54,17 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
     public void KonvertujGrafickiObjekatUJson() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setDateFormat("yyyy-MM-dd").create();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("ukupnaCena", (zspf.getTxtUkupnaCena().getText().isEmpty() ? null : zspf.getTxtUkupnaCena().getText()));
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("ukupnaCena", (zspf.getTxtUkupnaCena().getText().isEmpty() ? null : zspf.getTxtUkupnaCena().getText()));
         Kupac kupac = (Kupac) zspf.getCmbKupci().getSelectedItem();
         JsonObject jsonKupac = (JsonObject) gson.toJsonTree(kupac);
-        obj.add("kupac", jsonKupac);
-        obj.addProperty("datumIzdavanja", (zspf.getJdcDatumIzdavanja().getDate() == null ? null : sdf.format(zspf.getJdcDatumIzdavanja().getDate())));
-        obj.addProperty("sezona", (zspf.getTxtSezona().getText().isEmpty() ? null : zspf.getTxtSezona().getText()));
+        obj1.add("kupac", jsonKupac);
+        obj1.addProperty("datumIzdavanja", (zspf.getJdcDatumIzdavanja().getDate() == null ? null : sdf.format(zspf.getJdcDatumIzdavanja().getDate())));
+        obj1.addProperty("sezona", (zspf.getTxtSezona().getText().isEmpty() ? null : zspf.getTxtSezona().getText()));
         ModelTabeleStavkeSkiPasa model = (ModelTabeleStavkeSkiPasa) zspf.getTblStavkeSkiPasa().getModel();
         JsonArray arr = (JsonArray) gson.toJsonTree(model.getSkiPas().getStavkeSkiPasa());
-        obj.add("stavkeSkiPasa", arr);
-        jsonString = gson.toJson(obj);
+        obj1.add("stavkeSkiPasa", arr);
+        obj.add("parametar", obj1);
     }
 
     @Override
@@ -206,24 +205,32 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
     }
 
     private void soZapamtiKupca(Kupac kupac) throws Exception {
-        Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("brojLK", kupac.getBrojLK());
-        obj.addProperty("ime", kupac.getIme());
-        obj.addProperty("prezime", kupac.getPrezime());
-        jsonString = gson.toJson(obj);
-        Zahtev zahtev = new Zahtev(Operacije.ZAPAMTI_KUPCA, jsonString);
-        Odgovor odgovor;
+        obj = new JsonObject();
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("brojLK", kupac.getBrojLK());
+        obj1.addProperty("ime", kupac.getIme());
+        obj1.addProperty("prezime", kupac.getPrezime());
+        obj1.add("kupac", gson.toJsonTree(obj1));
+        KonvertujOperacijuUJson(Operacije.ZAPAMTI_KUPCA);
+        String odgovor;
         try {
-            odgovor = Komunikacija.getInstanca().pozivSo(zahtev);
-            if (odgovor.isUspesno()) {
-                jsonString = odgovor.getRezultat();
+            odgovor = Komunikacija.getInstanca().pozivSo(gson.toJson(obj));
+            JsonElement element = JsonParser.parseString(odgovor);
+            if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
+                 jsonString = gson.toJson(element.getAsJsonObject().get("Popunime"));
             } else {
-                throw odgovor.getException();
+                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
             }
         } catch (Exception ex) {
             throw ex;
         }
     }
+
+    @Override
+    protected void KonvertujOperacijuUJson(int op) {
+        super.KonvertujOperacijuUJson(op); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+          
 
 }

@@ -30,14 +30,15 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
+        JsonObject obj1 = new JsonObject();
         String[] imePrezime = pspf.getTxtImePrezimeKupca().getText().split(" ");
-        obj.addProperty("ime", imePrezime[0]);
+        obj1.addProperty("ime", imePrezime[0]);
         try {
-            obj.addProperty("prezime", imePrezime[1]);
+            obj1.addProperty("prezime", imePrezime[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
         }
-        jsonString = gson.toJson(obj);
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

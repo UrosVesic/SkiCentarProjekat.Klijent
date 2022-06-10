@@ -31,8 +31,7 @@ public class KontrolerKIPrijaviSe extends OpstiKontrolerKI {
         JsonObject domObj = new JsonObject();
         domObj.addProperty("email", pf.getTxtEmail().getText());
         domObj.addProperty("sifra", String.valueOf(pf.getTxtSifra().getPassword()));
-        obj.add("korisnik", domObj);
-        //jsonString = new Gson().toJson(obj);
+        obj.add("parametar", domObj);
     }
 
     @Override
