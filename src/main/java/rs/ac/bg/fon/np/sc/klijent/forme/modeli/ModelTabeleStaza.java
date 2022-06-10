@@ -19,6 +19,7 @@ public class ModelTabeleStaza extends AbstractTableModel {
 
     List<Staza> staze;
     String[] kolone = new String[]{"Broj staze", "Naziv staze", "TIp staze", "Ski centar"};
+    private final boolean editable_colls[] = {true, true, true, true};
 
     public ModelTabeleStaza() {
         staze = new ArrayList<>();
@@ -115,7 +116,7 @@ public class ModelTabeleStaza extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return this.editable_colls[columnIndex];
     }
 
     public void obrisi(int index) {
@@ -128,6 +129,20 @@ public class ModelTabeleStaza extends AbstractTableModel {
             return staze.get(staze.size() - 1);
         }
         throw new Exception();
+    }
+
+    public void setCollNonEditable(int col) {
+        this.editable_colls[col] = false;
+        fireTableDataChanged();
+    }
+
+    public void osveziStazu(Staza staza) {
+        for (Staza staza1 : staze) {
+            if (staza.equals(staza1)) {
+                staza1 = staza;
+                fireTableDataChanged();
+            }
+        }
     }
 
 }
