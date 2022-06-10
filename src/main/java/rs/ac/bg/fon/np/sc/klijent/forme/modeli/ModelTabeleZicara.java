@@ -100,7 +100,7 @@ public class ModelTabeleZicara extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return (columnIndex > 0 && columnIndex < 5);
+        return (columnIndex > 0 && columnIndex < 4);
     }
 
     public void obrisi(int selectedRow) {
