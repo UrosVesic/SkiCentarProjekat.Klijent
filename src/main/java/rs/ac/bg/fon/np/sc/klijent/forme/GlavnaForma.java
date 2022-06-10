@@ -50,7 +50,6 @@ public class GlavnaForma extends javax.swing.JFrame {
         jmSkiCentar = new javax.swing.JMenu();
         jmiKreirajNoviSkiCentar = new javax.swing.JMenuItem();
         jmiIzmeniSkiCentar = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jmStaza = new javax.swing.JMenu();
         jmiKreirajNovuStazu = new javax.swing.JMenuItem();
         jmiPronadjiIzmeniStazu = new javax.swing.JMenuItem();
@@ -103,14 +102,6 @@ public class GlavnaForma extends javax.swing.JFrame {
             }
         });
         jmSkiCentar.add(jmiIzmeniSkiCentar);
-
-        jMenuItem2.setText("Izmeni sve podatke o centru");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jmSkiCentar.add(jMenuItem2);
 
         jMenuBar1.add(jmSkiCentar);
 
@@ -237,10 +228,6 @@ public class GlavnaForma extends javax.swing.JFrame {
         new PronadjiSkiPasoveForma().setVisible(true);
     }//GEN-LAST:event_jmiIzmeniSkiPasActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -249,7 +236,6 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jmSkiCentar;
     private javax.swing.JMenu jmSkiKarta;
     private javax.swing.JMenu jmSkiPas;
