@@ -44,7 +44,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
             } else {
-                JOptionPane.showMessageDialog(oef, "Neuspesno pamcenje ski centra: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Neuspesno pamcenje ski centra: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -63,7 +63,7 @@ public abstract class OpstiKontrolerKI {
                 jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
                 KonvertujJsonObjekatUGrafickeKomponente();
             } else {
-                JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje ski centra: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Neuspesno ucitavanje ski centra: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -104,7 +104,7 @@ public abstract class OpstiKontrolerKI {
             if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
                 jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
             } else {
-                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+               throw new Exception(gson.fromJson(element.getAsJsonObject().get("exception"), String.class));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -123,7 +123,7 @@ public abstract class OpstiKontrolerKI {
             if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
                 jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
             } else {
-                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+               throw new Exception(gson.fromJson(element.getAsJsonObject().get("exception"), String.class));
             }
         } catch (Exception ex) {
             throw new Exception("Neuspesno ucitavanje liste ski karata");
@@ -142,7 +142,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski kartu");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da sacuva ski kartu: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -162,7 +162,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski karte");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski karte: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski karte: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -182,7 +182,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio stazu");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -203,7 +203,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao staze");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi staze: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi staze: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -223,7 +223,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je ucitao stazu");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -243,10 +243,11 @@ public abstract class OpstiKontrolerKI {
                 jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio stazu");
+                
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni stazu: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
                 i = 1;
-                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+               throw new Exception(gson.fromJson(element.getAsJsonObject().get("exception"), String.class));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -269,7 +270,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio zicaru");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti zicaru: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -289,7 +290,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski centar");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski centar: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -310,7 +311,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski centar");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski centar: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski centar: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -330,7 +331,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio ski centar");
             } else {
-                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+               throw new Exception(gson.fromJson(element.getAsJsonObject().get("exception"), String.class));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -346,11 +347,11 @@ public abstract class OpstiKontrolerKI {
             odgovor = Komunikacija.getInstanca().pozivSo(gson.toJson(obj));
             JsonElement element = JsonParser.parseString(odgovor);
             if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
-                jsonString = gson.toJson(element.getAsJsonObject().get("skiPas"));
+                jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je zapamtio ski pas");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da zapamti ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -370,7 +371,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je pronasao ski pasove");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski pasove: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da pretrazi ski pasove: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -398,7 +399,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je ucitao ski pas");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da ucita ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -418,7 +419,7 @@ public abstract class OpstiKontrolerKI {
                 KonvertujJsonObjekatUGrafickeKomponente();
                 JOptionPane.showMessageDialog(oef, "Sistem je promenio ski pas");
             } else {
-                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class).getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(oef, "Sistem ne moze da promeni ski pas: " + gson.fromJson(element.getAsJsonObject().get("exception"), String.class), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -435,7 +436,7 @@ public abstract class OpstiKontrolerKI {
             if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
                 jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
             } else {
-                throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
+               throw new Exception(gson.fromJson(element.getAsJsonObject().get("exception"), String.class));
             }
         } catch (Exception ex) {
             throw new Exception("Neuspesno ucitavanje kupaca");
