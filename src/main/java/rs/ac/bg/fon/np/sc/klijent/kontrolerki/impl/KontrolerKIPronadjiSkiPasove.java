@@ -7,7 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleSkiPas;
 import rs.ac.bg.fon.np.sc.klijent.forme.skipas.PronadjiSkiPasoveForma;

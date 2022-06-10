@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiPas;
 
 /**
  *

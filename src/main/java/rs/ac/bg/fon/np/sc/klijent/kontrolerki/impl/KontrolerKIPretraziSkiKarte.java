@@ -8,7 +8,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.math.BigDecimal;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleSkiKarte;
 import rs.ac.bg.fon.np.sc.klijent.forme.skikarta.PretraziSkiKarteForma;

@@ -7,8 +7,8 @@ package rs.ac.bg.fon.np.sc.klijent.forme.skikarta;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl.KontrolerKIPretraziSkiKarte;
 

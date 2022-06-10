@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Staza;
 
 /**
  *

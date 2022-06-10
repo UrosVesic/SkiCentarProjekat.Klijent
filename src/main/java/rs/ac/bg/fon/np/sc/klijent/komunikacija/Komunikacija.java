@@ -6,9 +6,9 @@
 package rs.ac.bg.fon.np.sc.klijent.komunikacija;
 
 import java.net.Socket;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Posiljalac;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Primalac;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Korisnik;
+import rs.ac.bg.fon.np.sc.commonLib.komunikacija.Posiljalac;
+import rs.ac.bg.fon.np.sc.commonLib.komunikacija.Primalac;
 
 /**
  *

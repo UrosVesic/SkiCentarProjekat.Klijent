@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.zicara.ZapamtiZicaruForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;

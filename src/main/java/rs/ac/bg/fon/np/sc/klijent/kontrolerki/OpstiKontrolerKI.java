@@ -10,9 +10,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import javax.swing.JOptionPane;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Operacije;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Korisnik;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.komunikacija.Operacije;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.komunikacija.Komunikacija;
 

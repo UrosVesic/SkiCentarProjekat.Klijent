@@ -6,8 +6,8 @@
 package rs.ac.bg.fon.np.sc.klijent.forme.staza;
 
 import javax.swing.JButton;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Staza;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl.KontrolerKIZapamtiStazu;
 

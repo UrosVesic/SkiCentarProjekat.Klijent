@@ -7,7 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.PromeniSkiCentarForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
