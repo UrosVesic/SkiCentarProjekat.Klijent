@@ -67,4 +67,4 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
         model.azurirajStazu(staza);
     }
 
-}
+    }
