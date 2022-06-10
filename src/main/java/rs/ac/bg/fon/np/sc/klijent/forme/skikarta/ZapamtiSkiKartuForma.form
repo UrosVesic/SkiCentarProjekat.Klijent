@@ -138,12 +138,15 @@
     <Component class="javax.swing.JComboBox" name="cmbVrstaSkiKarte">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
+          <StringArray count="8">
             <StringItem index="0" value="Jednodnevna"/>
             <StringItem index="1" value="Dvodnevna"/>
             <StringItem index="2" value="Trodnevna"/>
-            <StringItem index="3" value="Sedmodnevna"/>
-            <StringItem index="4" value="Nocna"/>
+            <StringItem index="3" value="Cetvorodnevna"/>
+            <StringItem index="4" value="Petodnevna"/>
+            <StringItem index="5" value="Sestodnevna"/>
+            <StringItem index="6" value="Sedmodnevna"/>
+            <StringItem index="7" value=" "/>
           </StringArray>
         </Property>
       </Properties>

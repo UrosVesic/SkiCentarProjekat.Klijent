@@ -67,7 +67,7 @@ public class ZapamtiSkiKartuForma extends OpstaEkranskaForma {
 
         jLabel3.setText("Cena ski karte:");
 
-        cmbVrstaSkiKarte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jednodnevna", "Dvodnevna", "Trodnevna", "Sedmodnevna", "Nocna" }));
+        cmbVrstaSkiKarte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Jednodnevna", "Dvodnevna", "Trodnevna", "Cetvorodnevna", "Petodnevna", "Sestodnevna", "Sedmodnevna", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
