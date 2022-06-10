@@ -32,7 +32,7 @@ public class KontrolerKIZapamtiSkiCentar extends OpstiKontrolerKI {
         domObj.addProperty("nazivSkiCentra", zscf.getTxtNazivSkiCentra().getText());
         domObj.addProperty("nazivPlanine", zscf.getTxtNazivPlanine().getText());
         domObj.addProperty("radnoVreme", zscf.getTxtRadnoVreme().getText());
-        obj.add("skiCentar", domObj);
+        obj.add("parametar", domObj);
         //jsonString = gson.toJson(domObj);
     }
 
