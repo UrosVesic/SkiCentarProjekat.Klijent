@@ -5,7 +5,7 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.forme;
 
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
 
 
 /**

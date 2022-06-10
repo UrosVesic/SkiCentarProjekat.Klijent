@@ -12,9 +12,9 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.table.TableColumn;
 import rs.ac.bg.fon.np.sc.commonLib.dto.SkiCentarDto;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Zicara;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Staza;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Zicara;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleStaza;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleZicara;
@@ -41,7 +41,7 @@ public class KontrolerKiPromeniSkiCentarDet extends OpstiKontrolerKI {
         ModelTabeleZicara modelZicare = (ModelTabeleZicara) pscd.getTblZicare().getModel();
 
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
+        JsonObject obj1 = new JsonObject();
         JsonObject objSkiCentar = new JsonObject();
         objSkiCentar.addProperty("sifraSkiCentra", pscd.getTxtSifraSkiCentra().getText().isEmpty() ? null : pscd.getTxtSifraSkiCentra().getText());
         objSkiCentar.addProperty("nazivSkiCentra", pscd.getTxtNazivSkiCentra().getText().isEmpty() ? null : pscd.getTxtNazivSkiCentra().getText());
@@ -49,10 +49,11 @@ public class KontrolerKiPromeniSkiCentarDet extends OpstiKontrolerKI {
         objSkiCentar.addProperty("radnoVreme", pscd.getTxtRadnoVreme().getText().isEmpty() ? null : pscd.getTxtRadnoVreme().getText());
         JsonArray arrStaze = (JsonArray) gson.toJsonTree(modelStaze.getStaze());
         JsonArray arrZicare = (JsonArray) gson.toJsonTree(modelZicare.getZicare());
-        obj.add("skiCentar", objSkiCentar);
-        obj.add("staze", arrStaze);
-        obj.add("zicare", arrZicare);
-        jsonString = gson.toJson(obj);
+        obj1.add("skiCentar", objSkiCentar);
+        obj1.add("staze", arrStaze);
+        obj1.add("zicare", arrZicare);
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

@@ -7,7 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleSkiPas;
 import rs.ac.bg.fon.np.sc.klijent.forme.skipas.PronadjiSkiPasoveForma;
@@ -30,14 +30,15 @@ public class KontrolerKIPronadjiSkiPasove extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
+        JsonObject obj1 = new JsonObject();
         String[] imePrezime = pspf.getTxtImePrezimeKupca().getText().split(" ");
-        obj.addProperty("ime", imePrezime[0]);
+        obj1.addProperty("ime", imePrezime[0]);
         try {
-            obj.addProperty("prezime", imePrezime[1]);
+            obj1.addProperty("prezime", imePrezime[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
         }
-        jsonString = gson.toJson(obj);
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

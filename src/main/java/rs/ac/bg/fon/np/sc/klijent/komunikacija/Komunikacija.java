@@ -5,13 +5,10 @@
  */
 package rs.ac.bg.fon.np.sc.klijent.komunikacija;
 
-import com.google.gson.Gson;
 import java.net.Socket;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Odgovor;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Posiljalac;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Primalac;
-import rs.ac.bg.fon.np.sc.commonlib.komunikacija.Zahtev;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Korisnik;
+import rs.ac.bg.fon.np.sc.commonLib.komunikacija.Posiljalac;
+import rs.ac.bg.fon.np.sc.commonLib.komunikacija.Primalac;
 
 /**
  *
@@ -45,16 +42,14 @@ public class Komunikacija {
         }
         return instanca;
     }
-
-    public Odgovor pozivSo(Zahtev zahtev) throws Exception {
+    
+    public String pozivSo(String zahtev) throws Exception {
         new Posiljalac(socket).posalji(zahtev);
-        return (Odgovor) new Primalac(socket).primi();
+        return  (String) new Primalac(socket).primi();
     }
 
-    public void setTrenutniKorisnikJson(String json) {
-        Gson gson = new Gson();
-        Korisnik k = gson.fromJson(json, Korisnik.class);
-        trenutniKorisnik = k;
+    public void setTrenutniKorisnikJson(Korisnik korisnik) {
+        trenutniKorisnik = korisnik;
     }
 
 }

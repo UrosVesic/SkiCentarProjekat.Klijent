@@ -8,8 +8,8 @@ package rs.ac.bg.fon.np.sc.klijent.forme.modeli;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Staza;
 
 /**
  *

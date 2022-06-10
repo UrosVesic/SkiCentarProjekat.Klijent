@@ -11,8 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl.KontrolerKiPromeniSkiCentarDet;
 

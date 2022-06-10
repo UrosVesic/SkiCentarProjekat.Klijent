@@ -15,7 +15,7 @@ import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Staza;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Staza;
 
 /**
  *
@@ -33,9 +33,10 @@ public class KontrolerKIPronadjiStaze extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("nazivSkiCentra", psf.getTxtSkiCentar().getText());
-        jsonString = gson.toJson(obj);
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("nazivSkiCentra", psf.getTxtSkiCentar().getText());
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

@@ -27,11 +27,13 @@ public class KontrolerKIZapamtiSkiCentar extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("nazivSkiCentra", zscf.getTxtNazivSkiCentra().getText());
-        obj.addProperty("nazivPlanine", zscf.getTxtNazivPlanine().getText());
-        obj.addProperty("radnoVreme", zscf.getTxtRadnoVreme().getText());
-        jsonString = gson.toJson(obj);
+        obj = new JsonObject();
+        JsonObject domObj = new JsonObject();
+        domObj.addProperty("nazivSkiCentra", zscf.getTxtNazivSkiCentra().getText());
+        domObj.addProperty("nazivPlanine", zscf.getTxtNazivPlanine().getText());
+        domObj.addProperty("radnoVreme", zscf.getTxtRadnoVreme().getText());
+        obj.add("skiCentar", domObj);
+        //jsonString = gson.toJson(domObj);
     }
 
     @Override

@@ -6,7 +6,7 @@
 package rs.ac.bg.fon.np.sc.klijent.forme.modeli;
 
 import javax.swing.table.AbstractTableModel;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
 
 /**
  *

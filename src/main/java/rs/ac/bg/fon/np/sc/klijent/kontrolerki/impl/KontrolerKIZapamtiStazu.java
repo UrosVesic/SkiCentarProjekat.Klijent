@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.staza.ZapamtiStazuForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
@@ -30,13 +30,13 @@ public class KontrolerKIZapamtiStazu extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("brojStaze", zsf.getTxtBrojStaze().getText());
-        obj.addProperty("nazivStaze", zsf.getTxtNazivStaze().getText());
-        obj.addProperty("tipStaze", String.valueOf(zsf.getCmbTipStaze().getSelectedItem()));
-        JsonObject obj1 = (JsonObject) gson.toJsonTree(zsf.getCmbSkiCentar().getSelectedItem());
-        obj.add("skiCentar", obj1);
-        jsonString = gson.toJson(obj);
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("brojStaze", zsf.getTxtBrojStaze().getText());
+        obj1.addProperty("nazivStaze", zsf.getTxtNazivStaze().getText());
+        obj1.addProperty("tipStaze", String.valueOf(zsf.getCmbTipStaze().getSelectedItem()));
+        obj1.add("skiCentar", gson.toJsonTree(zsf.getCmbSkiCentar().getSelectedItem()));
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override

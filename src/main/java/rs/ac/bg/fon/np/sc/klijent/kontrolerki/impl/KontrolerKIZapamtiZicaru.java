@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.zicara.ZapamtiZicaruForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
@@ -30,14 +30,15 @@ public class KontrolerKIZapamtiZicaru extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("nazivZicare", zzf.getTxtNazivZicare().getText());
-        obj.addProperty("radnoVreme", zzf.getTxtRadnoVreme().getText());
-        obj.addProperty("kapacitet", (zzf.getTxtKapacitet().getText().isEmpty() ? null : Integer.parseInt(zzf.getTxtKapacitet().getText())));
-        obj.addProperty("UFunkciji", (String) zzf.getCmbUfunkciji().getSelectedItem());
+        JsonObject obj1 = new JsonObject();
+        obj1.addProperty("nazivZicare", zzf.getTxtNazivZicare().getText());
+        obj1.addProperty("radnoVreme", zzf.getTxtRadnoVreme().getText());
+        obj1.addProperty("kapacitet", (zzf.getTxtKapacitet().getText().isEmpty() ? null : Integer.parseInt(zzf.getTxtKapacitet().getText())));
+        obj1.addProperty("UFunkciji", (String) zzf.getCmbUfunkciji().getSelectedItem());
         JsonObject skiCentar = (JsonObject) gson.toJsonTree(zzf.getCmbSkiCentri().getSelectedItem());
-        obj.add("skiCentar", skiCentar);
-        jsonString = gson.toJson(obj);
+        obj1.add("skiCentar", skiCentar);
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
 
     }
 

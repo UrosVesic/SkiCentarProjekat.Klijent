@@ -8,8 +8,8 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.util.List;
-import rs.ac.bg.fon.np.sc.commonlib.domen.Korisnik;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.Korisnik;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.PrijaviSeForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
@@ -27,10 +27,11 @@ public class KontrolerKIPrijaviSe extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         PrijaviSeForma pf = (PrijaviSeForma) oef;
-        JsonObject obj = new JsonObject();
-        obj.addProperty("email", pf.getTxtEmail().getText());
-        obj.addProperty("sifra", String.valueOf(pf.getTxtSifra().getPassword()));
-        jsonString = new Gson().toJson(obj);
+        obj = new JsonObject();
+        JsonObject domObj = new JsonObject();
+        domObj.addProperty("email", pf.getTxtEmail().getText());
+        domObj.addProperty("sifra", String.valueOf(pf.getTxtSifra().getPassword()));
+        obj.add("parametar", domObj);
     }
 
     @Override

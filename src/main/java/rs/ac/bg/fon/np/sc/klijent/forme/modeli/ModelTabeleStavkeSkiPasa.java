@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
-import rs.ac.bg.fon.np.sc.commonlib.validator.ValidationException;
-import rs.ac.bg.fon.np.sc.commonlib.validator.Validator;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
-import rs.ac.bg.fon.np.sc.commonlib.domen.StavkaSkiPasa;
+import rs.ac.bg.fon.np.sc.commonLib.validator.ValidationException;
+import rs.ac.bg.fon.np.sc.commonLib.validator.Validator;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiPas;
+import rs.ac.bg.fon.np.sc.commonLib.domen.StavkaSkiPasa;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
 
 /**

@@ -9,9 +9,9 @@ import com.google.gson.GsonBuilder;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import rs.ac.bg.fon.np.sc.commonlib.domen.OpstiDomenskiObjekat;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiKarta;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiPas;
+import rs.ac.bg.fon.np.sc.commonLib.domen.OpstiDomenskiObjekat;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiPas;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl.KontrolerKIIzmeniSkiPas;
 

@@ -7,7 +7,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import rs.ac.bg.fon.np.sc.commonlib.domen.SkiCentar;
+import rs.ac.bg.fon.np.sc.commonLib.domen.SkiCentar;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.skicentar.PromeniSkiCentarForma;
 import rs.ac.bg.fon.np.sc.klijent.kontrolerki.OpstiKontrolerKI;
@@ -28,14 +28,15 @@ public class KontrolerKIPromeniSkiCentar extends OpstiKontrolerKI {
     @Override
     public void KonvertujGrafickiObjekatUJson() {
         Gson gson = new Gson();
-        JsonObject obj = new JsonObject();
+        JsonObject obj1= new JsonObject();
         if (!pscf.getTxtSifraSkiCentra().getText().isEmpty()) {
-            obj.addProperty("sifraSkiCentra", Long.parseLong(pscf.getTxtSifraSkiCentra().getText()));
+            obj1.addProperty("sifraSkiCentra", Long.parseLong(pscf.getTxtSifraSkiCentra().getText()));
         }
-        obj.addProperty("nazivSkiCentra", pscf.getTxtNazivSkiCentra().getText());
-        obj.addProperty("nazivPlanine", pscf.getTxtNazivPlanine().getText());
-        obj.addProperty("radnoVreme", pscf.getTxtRadnoVreme().getText());
-        jsonString = gson.toJson(obj);
+        obj1.addProperty("nazivSkiCentra", pscf.getTxtNazivSkiCentra().getText());
+        obj1.addProperty("nazivPlanine", pscf.getTxtNazivPlanine().getText());
+        obj1.addProperty("radnoVreme", pscf.getTxtRadnoVreme().getText());
+        obj = new JsonObject();
+        obj.add("parametar", obj1);
     }
 
     @Override
