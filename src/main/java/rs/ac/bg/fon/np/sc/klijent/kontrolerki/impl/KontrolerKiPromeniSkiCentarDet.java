@@ -74,7 +74,9 @@ public class KontrolerKiPromeniSkiCentarDet extends OpstiKontrolerKI {
     public void pripremiFormu(SkiCentar skiCentar) {
         pscd.getTxtSifraSkiCentra().setText(skiCentar.getSifraSkiCentra() + "");
         pscd.getTxtNazivSkiCentra().setText(skiCentar.getNazivSkiCentra() + "");
-        pscd.getTblStaze().setModel(new ModelTabeleStaza());
+        ModelTabeleStaza model = new ModelTabeleStaza();
+        model.setCollNonEditable(3);
+        pscd.getTblStaze().setModel(model);
         pscd.getTblZicare().setModel(new ModelTabeleZicara());
         TableColumn tc = pscd.getTblStaze().getColumnModel().getColumn(3);
         niz = new Gson().fromJson(jsonString, SkiCentar[].class);
@@ -83,7 +85,11 @@ public class KontrolerKiPromeniSkiCentarDet extends OpstiKontrolerKI {
 
     public void dodajStazu() {
         ModelTabeleStaza modelStaze = (ModelTabeleStaza) pscd.getTblStaze().getModel();
-        modelStaze.dodaj(new Staza());
+        Staza s = new Staza();
+        SkiCentar sc = new SkiCentar(Long.parseLong(pscd.getTxtSifraSkiCentra().getText()), pscd.getTxtNazivSkiCentra().getText(),
+                pscd.getTxtNazivPlanine().getText(), pscd.getTxtRadnoVreme().getText());
+        s.setSkiCentar(sc);
+        modelStaze.dodaj(s);
     }
 
     public void dodajZicaru() {
