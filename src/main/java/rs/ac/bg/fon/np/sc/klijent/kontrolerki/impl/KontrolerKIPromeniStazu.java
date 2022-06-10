@@ -44,7 +44,8 @@ public class KontrolerKIPromeniStazu extends OpstiKontrolerKI {
         obj1.addProperty("tipStaze", String.valueOf(psf.getCmbTipStaze().getSelectedItem()));
         obj1.add("skiCentar", gson.toJsonTree(psf.getCmbSkiCentar().getSelectedItem()));
         obj.add("parametar", obj1);
-        staza = gson.fromJson(jsonString, Staza.class);
+        String str = gson.toJson(obj1);
+        staza = gson.fromJson(str, Staza.class);
     }
 
     @Override
