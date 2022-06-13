@@ -31,7 +31,13 @@ public class KontrolerKIZapamtiSkiKartu extends OpstiKontrolerKI {
         obj = new JsonObject();
         JsonObject obj1 = new JsonObject();
         obj1.addProperty("vrstaSkiKarte", String.valueOf(zskf.getCmbVrstaSkiKarte().getSelectedItem()));
-        obj1.addProperty("cenaSkiKarte", zskf.getTxtCenaSkiKarte().getText());
+        if (!zskf.getTxtCenaSkiKarte().getText().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(oef, "Cena mora biti uneta kao broj");
+            obj1.addProperty("cenaSkiKarte", (String) null);
+        } else {
+            obj1.addProperty("cenaSkiKarte", zskf.getTxtCenaSkiKarte().getText().equals("") ? null : zskf.getTxtCenaSkiKarte().getText());
+        }
+
         obj1.add("skiCentar", gson.toJsonTree(zskf.getCmbSkiCentar().getSelectedItem()));
         obj.add("parametar", obj1);
     }
