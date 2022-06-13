@@ -211,13 +211,15 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
         obj1.addProperty("ime", kupac.getIme());
         obj1.addProperty("prezime", kupac.getPrezime());
         obj1.add("kupac", gson.toJsonTree(obj1));
+        obj.add("parametar", obj1);
         KonvertujOperacijuUJson(Operacije.ZAPAMTI_KUPCA);
         String odgovor;
         try {
             odgovor = Komunikacija.getInstanca().pozivSo(gson.toJson(obj));
             JsonElement element = JsonParser.parseString(odgovor);
             if (element.getAsJsonObject().get("uspesno").getAsBoolean()) {
-                 jsonString = gson.toJson(element.getAsJsonObject().get("Popunime"));
+                jsonString = gson.toJson(element.getAsJsonObject().get("rezultat"));
+                JOptionPane.showMessageDialog(oef, "Sistem je zapamtio kupca");
             } else {
                 throw gson.fromJson(element.getAsJsonObject().get("exception"), Exception.class);
             }
@@ -230,7 +232,5 @@ public class KontrolerKIZapamtiSkiPas extends OpstiKontrolerKI {
     protected void KonvertujOperacijuUJson(int op) {
         super.KonvertujOperacijuUJson(op); //To change body of generated methods, choose Tools | Templates.
     }
-    
-          
 
 }
