@@ -8,6 +8,7 @@ package rs.ac.bg.fon.np.sc.klijent.kontrolerki.impl;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.math.BigDecimal;
+import javax.swing.JOptionPane;
 import rs.ac.bg.fon.np.sc.commonLib.domen.SkiKarta;
 import rs.ac.bg.fon.np.sc.klijent.forme.OpstaEkranskaForma;
 import rs.ac.bg.fon.np.sc.klijent.forme.modeli.ModelTabeleSkiKarte;
@@ -29,7 +30,12 @@ public class KontrolerKIPretraziSkiKarte extends OpstiKontrolerKI {
         PretraziSkiKarteForma pskf = (PretraziSkiKarteForma) oef;
         Gson gson = new Gson();
         JsonObject obj1 = new JsonObject();
-        obj1.addProperty("cenaSkiKarte", pskf.getTxtGornjaCena().getText().isEmpty() ? null : new BigDecimal(pskf.getTxtGornjaCena().getText()));
+        try {
+            obj1.addProperty("cenaSkiKarte", pskf.getTxtGornjaCena().getText().isEmpty() ? null : new BigDecimal(pskf.getTxtGornjaCena().getText()));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(oef, "Cena mora biti uneta kao broj");
+            throw new RuntimeException();
+        }
         obj = new JsonObject();
         obj.add("parametar", obj1);
     }
